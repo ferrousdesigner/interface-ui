@@ -1,31 +1,32 @@
-import React, { useState } from 'react';
-import { Button } from '../../../components/Button/Button';
-import { Card } from '../../../components/Card/Card';
-import { Badge } from '../../../components/Badge/Badge';
-import { Tag } from '../../../components/Tag/Tag';
-import { Alert } from '../../../components/Alert/Alert';
-import { Progress } from '../../../components/Progress/Progress';
-import { Avatar } from '../../../components/Avatar/Avatar';
-import { Chip } from '../../../components/Chip/Chip';
-import { Input } from '../../../components/Input/Input';
-import { Textarea } from '../../../components/Textarea/Textarea';
-import { Checkbox } from '../../../components/Checkbox/Checkbox';
-import { Radio } from '../../../components/Radio/Radio';
-import { Switch } from '../../../components/Switch/Switch';
-import { Select } from '../../../components/Select/Select';
-import { Slider } from '../../../components/Slider/Slider';
-import { Table } from '../../../components/Table/Table';
-import { Tabs } from '../../../components/Tabs/Tabs';
-import { Accordion } from '../../../components/Accordion/Accordion';
-import { Menu } from '../../../components/Menu/Menu';
-import { Dropdown } from '../../../components/Dropdown/Dropdown';
-import { Pagination } from '../../../components/Pagination/Pagination';
-import { Modal } from '../../../components/Modal/Modal';
-import { Drawer } from '../../../components/Drawer/Drawer';
-import { Tooltip } from '../../../components/Tooltip/Tooltip';
-import { IconButton } from '../../../components/IconButton/IconButton';
-import { List } from '../../../components/List/List';
-import './DemoPage.css';
+import React, { useState } from "react";
+import { Button } from "../../../components/Button/Button";
+import { Card } from "../../../components/Card/Card";
+import { Badge } from "../../../components/Badge/Badge";
+import { Tag } from "../../../components/Tag/Tag";
+import { Alert } from "../../../components/Alert/Alert";
+import { Progress } from "../../../components/Progress/Progress";
+import { Avatar } from "../../../components/Avatar/Avatar";
+import { Chip } from "../../../components/Chip/Chip";
+import { Input } from "../../../components/Input/Input";
+import { Textarea } from "../../../components/Textarea/Textarea";
+import { Checkbox } from "../../../components/Checkbox/Checkbox";
+import { Radio } from "../../../components/Radio/Radio";
+import { Switch } from "../../../components/Switch/Switch";
+import { Select } from "../../../components/Select/Select";
+import { Slider } from "../../../components/Slider/Slider";
+import { Table } from "../../../components/Table/Table";
+import { Tabs } from "../../../components/Tabs/Tabs";
+import { Accordion } from "../../../components/Accordion/Accordion";
+import { Menu } from "../../../components/Menu/Menu";
+import { Dropdown } from "../../../components/Dropdown/Dropdown";
+import { Pagination } from "../../../components/Pagination/Pagination";
+import { Modal } from "../../../components/Modal/Modal";
+import { Drawer } from "../../../components/Drawer/Drawer";
+import { Tooltip } from "../../../components/Tooltip/Tooltip";
+import { IconButton } from "../../../components/IconButton/IconButton";
+import { List } from "../../../components/List/List";
+import "./DemoPage.css";
+import GlassSurface from "../../../components/GlassSurface/GlassSurface";
 
 export default function DemoPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -38,12 +39,11 @@ export default function DemoPage() {
       <section className="demo-hero">
         <div className="demo-hero-content">
           <Badge variant="primary">UI Component Library</Badge>
-          <h1 className="demo-hero-title">
-            Interface UI
-          </h1>
+          <h1 className="demo-hero-title">Interface UI</h1>
           <p className="demo-hero-description">
-            A comprehensive, modern React component library built with TypeScript. 
-            Beautiful, accessible, and customizable components for building exceptional user interfaces.
+            A comprehensive, modern React component library built with
+            TypeScript. Beautiful, accessible, and customizable components for
+            building exceptional user interfaces.
           </p>
           <div className="demo-hero-actions">
             <Button>Get Started</Button>
@@ -72,37 +72,74 @@ export default function DemoPage() {
         <div className="demo-features-grid">
           <Card hoverable className="demo-feature-card">
             <div className="demo-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M12 2L2 7l10 5 10-5-10-5z" />
                 <path d="M2 17l10 5 10-5" />
                 <path d="M2 12l10 5 10-5" />
               </svg>
             </div>
             <h3>Beautiful Design</h3>
-            <p>Modern, clean components with glass morphism effects and smooth animations</p>
+            <p>
+              Modern, clean components with glass morphism effects and smooth
+              animations
+            </p>
           </Card>
           <Card hoverable className="demo-feature-card">
             <div className="demo-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
               </svg>
             </div>
             <h3>Lightweight</h3>
-            <p>Zero external dependencies, optimized for performance and bundle size</p>
+            <p>
+              Zero external dependencies, optimized for performance and bundle
+              size
+            </p>
           </Card>
           <Card hoverable className="demo-feature-card">
             <div className="demo-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="12" cy="12" r="3" />
                 <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
               </svg>
             </div>
             <h3>Customizable</h3>
-            <p>Fully themeable with CSS variables and easy to customize for your brand</p>
+            <p>
+              Fully themeable with CSS variables and easy to customize for your
+              brand
+            </p>
           </Card>
           <Card hoverable className="demo-feature-card">
             <div className="demo-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                 <circle cx="9" cy="7" r="4" />
                 <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -114,7 +151,14 @@ export default function DemoPage() {
           </Card>
           <Card hoverable className="demo-feature-card">
             <div className="demo-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
                 <line x1="12" y1="18" x2="12.01" y2="18" />
               </svg>
@@ -124,7 +168,14 @@ export default function DemoPage() {
           </Card>
           <Card hoverable className="demo-feature-card">
             <div className="demo-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polyline points="16 18 22 12 16 6" />
                 <polyline points="8 6 2 12 8 18" />
               </svg>
@@ -138,7 +189,7 @@ export default function DemoPage() {
       {/* Component Showcase Section */}
       <section className="demo-showcase">
         <h2 className="demo-section-title">Component Showcase</h2>
-        
+
         {/* Form Components */}
         <div className="demo-component-group">
           <h3 className="demo-group-title">Form Components</h3>
@@ -153,17 +204,21 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Textarea</div>
-              <Textarea label="Message" placeholder="Enter your message" rows={3} />
+              <Textarea
+                label="Message"
+                placeholder="Enter your message"
+                rows={3}
+              />
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Select</div>
-              <Select 
-                label="Country" 
+              <Select
+                label="Country"
                 placeholder="Choose a country"
                 options={[
-                  { value: '1', label: 'United States' },
-                  { value: '2', label: 'Canada' },
-                  { value: '3', label: 'United Kingdom' },
+                  { value: "1", label: "United States" },
+                  { value: "2", label: "Canada" },
+                  { value: "3", label: "United Kingdom" },
                 ]}
               />
             </div>
@@ -181,7 +236,12 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Slider</div>
-              <Slider label="Volume" value={sliderValue} onChange={setSliderValue} showValue />
+              <Slider
+                label="Volume"
+                value={sliderValue}
+                onChange={setSliderValue}
+                showValue
+              />
             </div>
           </div>
         </div>
@@ -192,7 +252,10 @@ export default function DemoPage() {
           <div className="demo-components-grid">
             <div className="demo-component-item">
               <div className="demo-component-label">Card</div>
-              <Card header="Card Title" children="This is a card component with header and content." />
+              <Card
+                header="Card Title"
+                children="This is a card component with header and content."
+              />
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Badge</div>
@@ -228,7 +291,11 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Alert</div>
-              <Alert variant="info" title="Info" children="This is an informational alert" />
+              <Alert
+                variant="info"
+                title="Info"
+                children="This is an informational alert"
+              />
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Progress</div>
@@ -247,34 +314,51 @@ export default function DemoPage() {
           <div className="demo-components-grid">
             <div className="demo-component-item">
               <div className="demo-component-label">Tabs</div>
-              <Tabs items={[
-                { key: '1', label: 'Tab 1', content: 'Content for tab 1' },
-                { key: '2', label: 'Tab 2', content: 'Content for tab 2' },
-                { key: '3', label: 'Tab 3', content: 'Content for tab 3' },
-              ]} />
+              <Tabs
+                items={[
+                  { key: "1", label: "Tab 1", content: "Content for tab 1" },
+                  { key: "2", label: "Tab 2", content: "Content for tab 2" },
+                  { key: "3", label: "Tab 3", content: "Content for tab 3" },
+                ]}
+              />
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Accordion</div>
-              <Accordion items={[
-                { key: '1', header: 'Section 1', content: 'Content for section 1' },
-                { key: '2', header: 'Section 2', content: 'Content for section 2' },
-              ]} />
+              <Accordion
+                items={[
+                  {
+                    key: "1",
+                    header: "Section 1",
+                    content: "Content for section 1",
+                  },
+                  {
+                    key: "2",
+                    header: "Section 2",
+                    content: "Content for section 2",
+                  },
+                ]}
+              />
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Menu</div>
-              <Menu items={[
-                { key: '1', label: 'Home' },
-                { key: '2', label: 'About' },
-                { key: '3', label: 'Contact' },
-              ]} />
+              <Menu
+                items={[
+                  { key: "1", label: "Home" },
+                  { key: "2", label: "About" },
+                  { key: "3", label: "Contact" },
+                ]}
+              />
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Dropdown</div>
-              <Dropdown trigger="Select Option" items={[
-                { key: '1', label: 'Option 1' },
-                { key: '2', label: 'Option 2' },
-                { key: '3', label: 'Option 3' },
-              ]} />
+              <Dropdown
+                trigger="Select Option"
+                items={[
+                  { key: "1", label: "Option 1" },
+                  { key: "2", label: "Option 2" },
+                  { key: "3", label: "Option 3" },
+                ]}
+              />
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Pagination</div>
@@ -282,11 +366,13 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">List</div>
-              <List items={[
-                { key: '1', content: 'List Item 1' },
-                { key: '2', content: 'List Item 2' },
-                { key: '3', content: 'List Item 3' },
-              ]} />
+              <List
+                items={[
+                  { key: "1", content: "List Item 1" },
+                  { key: "2", content: "List Item 2" },
+                  { key: "3", content: "List Item 3" },
+                ]}
+              />
             </div>
           </div>
         </div>
@@ -297,16 +383,16 @@ export default function DemoPage() {
           <div className="demo-components-grid">
             <div className="demo-component-item demo-component-item-wide">
               <div className="demo-component-label">Table</div>
-              <Table 
+              <Table
                 columns={[
-                  { key: 'name', header: 'Name' },
-                  { key: 'role', header: 'Role' },
-                  { key: 'status', header: 'Status' },
+                  { key: "name", header: "Name" },
+                  { key: "role", header: "Role" },
+                  { key: "status", header: "Status" },
                 ]}
                 data={[
-                  { name: 'John Doe', role: 'Developer', status: 'Active' },
-                  { name: 'Jane Smith', role: 'Designer', status: 'Active' },
-                  { name: 'Bob Johnson', role: 'Manager', status: 'Inactive' },
+                  { name: "John Doe", role: "Developer", status: "Active" },
+                  { name: "Jane Smith", role: "Designer", status: "Active" },
+                  { name: "Bob Johnson", role: "Manager", status: "Inactive" },
                 ]}
               />
             </div>
@@ -320,13 +406,15 @@ export default function DemoPage() {
             <div className="demo-component-item">
               <div className="demo-component-label">Modal</div>
               <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
-              <Modal 
-                open={modalOpen} 
+              <Modal
+                open={modalOpen}
                 title="Modal Title"
                 onClose={() => setModalOpen(false)}
               >
                 <p>This is a modal dialog. You can place any content here.</p>
-                <div style={{ marginTop: '1rem', display: 'flex', gap: '0.5rem' }}>
+                <div
+                  style={{ marginTop: "1rem", display: "flex", gap: "0.5rem" }}
+                >
                   <Button onClick={() => setModalOpen(false)}>Close</Button>
                 </div>
               </Modal>
@@ -334,8 +422,8 @@ export default function DemoPage() {
             <div className="demo-component-item">
               <div className="demo-component-label">Drawer</div>
               <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
-              <Drawer 
-                open={drawerOpen} 
+              <Drawer
+                open={drawerOpen}
                 title="Drawer Title"
                 placement="right"
                 onClose={() => setDrawerOpen(false)}
@@ -346,7 +434,11 @@ export default function DemoPage() {
             <div className="demo-component-item">
               <div className="demo-component-label">Tooltip</div>
               <Tooltip title="This is a tooltip message">
-                <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>Hover over me</span>
+                <span
+                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                >
+                  Hover over me
+                </span>
               </Tooltip>
             </div>
           </div>
@@ -355,4 +447,3 @@ export default function DemoPage() {
     </div>
   );
 }
-

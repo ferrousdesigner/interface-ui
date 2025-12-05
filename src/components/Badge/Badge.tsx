@@ -1,5 +1,6 @@
-import React from 'react';
-import './Badge.css';
+import React from "react";
+import GlassSurface from "../GlassSurface/GlassSurface";
+import "./Badge.css";
 
 export interface BadgeProps {
   /**
@@ -9,11 +10,11 @@ export interface BadgeProps {
   /**
    * Badge variant
    */
-  variant?: 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'info';
+  variant?: "primary" | "secondary" | "success" | "error" | "warning" | "info";
   /**
    * Badge size
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   /**
    * Whether to show as dot (no text)
    */
@@ -34,35 +35,83 @@ export interface BadgeProps {
 
 export const Badge: React.FC<BadgeProps> = ({
   children,
-  variant = 'primary',
-  size = 'medium',
+  variant = "primary",
+  size = "medium",
   dot = false,
   max,
   count,
-  className = '',
+  className = "",
 }) => {
-  const displayCount = count !== undefined && max !== undefined && count > max 
-    ? `${max}+` 
-    : count?.toString();
+  const displayCount =
+    count !== undefined && max !== undefined && count > max
+      ? `${max}+`
+      : count?.toString();
+
+  // Size-based dimensions for GlassSurface wrapper
+  const getSizeDimensions = () => {
+    if (dot) {
+      // Dot badge dimensions
+      switch (size) {
+        case "small":
+          return { width: 6, height: 6 };
+        case "large":
+          return { width: 10, height: 10 };
+        default: // medium - typically 8px based on spacing-sm
+          return { width: 8, height: 8 };
+      }
+    }
+
+    // Regular badge dimensions - height matches badge height, width is auto
+    switch (size) {
+      case "small":
+        return { width: "auto", height: 18 };
+      case "large":
+        return { width: "auto", height: 24 };
+      default: // medium
+        return { width: "auto", height: 20 };
+    }
+  };
+
+  const dimensions = getSizeDimensions();
 
   if (dot) {
     return (
-      <span className={`badge badge-dot ${variant} ${size} ${className}`} />
+      <GlassSurface
+        borderRadius={999}
+        className="badge-wrapper"
+        width={dimensions.width}
+        height={dimensions.height}
+      >
+        <span className={`badge badge-dot ${variant} ${size} ${className}`} />
+      </GlassSurface>
     );
   }
 
   if (count !== undefined) {
     return (
-      <span className={`badge badge-count ${variant} ${size} ${className}`}>
-        {displayCount}
-      </span>
+      <GlassSurface
+        borderRadius={999}
+        className="badge-wrapper"
+        width={dimensions.width}
+        height={dimensions.height}
+      >
+        <span className={`badge badge-count ${variant} ${size} ${className}`}>
+          {displayCount}
+        </span>
+      </GlassSurface>
     );
   }
 
   return (
-    <span className={`badge ${variant} ${size} ${className}`}>
-      {children}
-    </span>
+    <GlassSurface
+      borderRadius={999}
+      className="badge-wrapper"
+      width={dimensions.width}
+      height={dimensions.height}
+    >
+      <span className={`badge ${variant} ${size} ${className}`}>
+        {children}
+      </span>
+    </GlassSurface>
   );
 };
-

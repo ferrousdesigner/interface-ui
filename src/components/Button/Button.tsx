@@ -1,5 +1,6 @@
-import React from 'react';
-import './Button.css';
+import React from "react";
+import GlassSurface from "../GlassSurface/GlassSurface";
+import "./Button.css";
 
 export interface ButtonProps {
   /**
@@ -13,20 +14,24 @@ export interface ButtonProps {
   /**
    * The variant of the button
    */
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
 }
 
 export const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
-  variant = 'primary'
+  variant = "primary",
 }) => {
   return (
-    <button
-      className={`button ${variant} gl`}
-      onClick={onClick}
+    <GlassSurface
+      borderRadius={999}
+      height={40}
+      hugWidth
+      className="button-wrapper"
     >
-      {children}
-    </button>
+      <button className={`button ${variant}`} onClick={onClick}>
+        {children}
+      </button>
+    </GlassSurface>
   );
-}; 
+};

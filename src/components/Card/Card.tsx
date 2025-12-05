@@ -1,5 +1,5 @@
-import React from 'react';
-import './Card.css';
+import React from "react";
+import "./Card.css";
 
 export interface CardProps {
   /**
@@ -37,7 +37,7 @@ export interface CardProps {
   /**
    * Card variant
    */
-  variant?: 'default' | 'outlined' | 'elevated';
+  variant?: "default" | "outlined" | "elevated";
   /**
    * Card className
    */
@@ -53,39 +53,32 @@ export const Card: React.FC<CardProps> = ({
   hoverable = false,
   clickable = false,
   onClick,
-  variant = 'default',
-  className = '',
+  variant = "default",
+  className = "",
 }) => {
   return (
     <div
-      className={`card ${variant} ${hoverable ? 'hoverable' : ''} ${clickable ? 'clickable' : ''} ${image ? 'has-image' : ''} gl ${className}`}
+      className={`card ${variant} ${hoverable ? "hoverable" : ""} ${
+        clickable ? "clickable" : ""
+      } ${image ? "has-image" : ""} gl ${className}`}
       onClick={clickable ? onClick : undefined}
-      role={clickable ? 'button' : undefined}
+      role={clickable ? "button" : undefined}
       tabIndex={clickable ? 0 : undefined}
-      onKeyDown={clickable ? (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onClick?.();
-        }
-      } : undefined}
+      onKeyDown={
+        clickable
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onClick?.();
+              }
+            }
+          : undefined
+      }
     >
-      {image && (
-        <img src={image} alt={imageAlt || ''} className="card-image" />
-      )}
-      {header && (
-        <div className="card-header">
-          {header}
-        </div>
-      )}
-      <div className="card-body">
-        {children}
-      </div>
-      {footer && (
-        <div className="card-footer">
-          {footer}
-        </div>
-      )}
+      {image && <img src={image} alt={imageAlt || ""} className="card-image" />}
+      {header && <div className="card-header">{header}</div>}
+      <div className="card-body">{children}</div>
+      {footer && <div className="card-footer">{footer}</div>}
     </div>
   );
 };
-

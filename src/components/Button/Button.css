@@ -1,7 +1,5 @@
-/* Liquid Glass Filter Class */
-.gl {
-  backdrop-filter: url(#liquid-glass-filter) !important;
-  -webkit-backdrop-filter: blur(3px) !important;
+.button-wrapper {
+  display: inline-block;
 }
 
 .button {
@@ -10,20 +8,21 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.05);
+  background: transparent;
   color: var(--text-color-inverse);
-  box-shadow: var(--glass-shadow-sm);
-  backdrop-filter: saturate(180%) blur(4px);
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.5);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  display: inline-block;
+  display: block;
   text-decoration: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   overflow: hidden;
   border-radius: var(--radius-full);
+  min-width: 100px;
+  height: 40px;
+  width: 100%;
 }
 
 .button:focus {
@@ -32,7 +31,6 @@
 
 .button:hover {
   transform: scale(1.05);
-  backdrop-filter: saturate(180%) blur(4px);
 }
 
 .button:active {
@@ -40,10 +38,5 @@
 }
 
 .button.secondary {
-  background: rgba(150, 150, 150, 0.05);
   color: var(--text-color);
-}
-
-.button.secondary:hover {
-  background: rgba(150, 150, 150, 0.08);
 }

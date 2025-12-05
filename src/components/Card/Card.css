@@ -7,9 +7,9 @@
     0 4px 8px 0 rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.2);
   backdrop-filter: saturate(180%) blur(4px);
-  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.5), 
-    backdrop-filter var(--transition-base), 
-    box-shadow var(--transition-base), 
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.5),
+    backdrop-filter var(--transition-base),
+    box-shadow var(--transition-base),
     transform var(--transition-base);
   overflow: hidden;
   border-radius: var(--radius-lg);
