@@ -5,13 +5,11 @@
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  background-color: var(--background-color-dark);
   color: var(--text-color-inverse);
-  box-shadow: var(--glass-shadow-sm);
-  backdrop-filter: saturate(180%) blur(2px);
-  transition: backdrop-filter var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+  transition: backdrop-filter var(--transition-base), box-shadow var(--transition-base);
   outline: none;
   padding: 0;
+  transform: none !important;
 }
 
 .icon-button.small {
@@ -32,18 +30,23 @@
   font-size: var(--font-size-2xl);
 }
 
-.icon-button:hover:not(:disabled) {
-  backdrop-filter: saturate(180%) blur(3px);
+.icon-button__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-base);
+  transform-origin: center;
+  will-change: transform;
 }
 
-.icon-button:active:not(:disabled) {
-  transform: scale(0.95);
+.icon-button:hover:not(:disabled) .icon-button__icon {
+  transform: scale(1.05);
 }
 
-.icon-button:focus {
-  box-shadow: var(--glass-shadow-sm),
-    0 0 0 2px var(--color-accent-300);
+.icon-button:active:not(:disabled) .icon-button__icon {
+  transform: scale(1.15);
 }
+
 
 .icon-button.disabled {
   opacity: 0.5;
@@ -66,4 +69,3 @@
 .icon-button.ghost:hover:not(:disabled) {
   background-color: var(--background-color-light);
 }
-
