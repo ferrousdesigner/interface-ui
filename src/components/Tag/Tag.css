@@ -4,9 +4,6 @@
   border-radius: var(--radius-sm);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
-  background-color: var(--background-color-dark);
-  box-shadow: var(--glass-shadow-sm);
-  backdrop-filter: saturate(180%) blur(2px);
 }
 
 .tag.small {
@@ -28,12 +25,10 @@
 }
 
 .tag.default {
-  background-color: var(--background-color-light);
   color: var(--text-color);
 }
 
 .tag.primary {
-  background-color: var(--color-primary-200);
   color: var(--color-primary);
 }
 
@@ -56,4 +51,3 @@
   background-color: var(--color-warning-200);
   color: var(--color-warning);
 }
-

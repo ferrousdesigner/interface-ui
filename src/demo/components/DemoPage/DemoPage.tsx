@@ -130,6 +130,7 @@ export default function DemoPage() {
               brand
             </p>
           </Card>
+
           <Card hoverable className="demo-feature-card">
             <div className="demo-feature-icon">
               <svg
