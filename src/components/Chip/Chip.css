@@ -5,9 +5,6 @@
   border-radius: var(--radius-2xl);
   font-weight: var(--font-weight-medium);
   white-space: nowrap;
-  background-color: var(--background-color-dark);
-  box-shadow: var(--glass-shadow-sm);
-  backdrop-filter: saturate(180%) blur(2px);
   transition: backdrop-filter var(--transition-base), box-shadow var(--transition-base);
 }
 
@@ -103,4 +100,3 @@
   background-color: var(--color-warning-200);
   color: var(--color-warning);
 }
-

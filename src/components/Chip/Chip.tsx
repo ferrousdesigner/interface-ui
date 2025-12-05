@@ -1,5 +1,6 @@
-import React from 'react';
-import './Chip.css';
+import React from "react";
+import GlassSurface from "../GlassSurface/GlassSurface";
+import "./Chip.css";
 
 export interface ChipProps {
   /**
@@ -17,11 +18,17 @@ export interface ChipProps {
   /**
    * Chip variant
    */
-  variant?: 'default' | 'primary' | 'secondary' | 'success' | 'error' | 'warning';
+  variant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "error"
+    | "warning";
   /**
    * Chip size
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   /**
    * Whether the chip is disabled
    */
@@ -36,10 +43,10 @@ export const Chip: React.FC<ChipProps> = ({
   children,
   removable = false,
   onRemove,
-  variant = 'default',
-  size = 'medium',
+  variant = "default",
+  size = "medium",
   disabled = false,
-  className = '',
+  className = "",
 }) => {
   const handleRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -49,28 +56,37 @@ export const Chip: React.FC<ChipProps> = ({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       handleRemove(e as any);
     }
   };
 
+  // Get height based on size
+  const chipHeight = size === "small" ? 24 : size === "medium" ? 28 : 32;
+
   return (
-    <span className={`chip ${variant} ${size} ${disabled ? 'disabled' : ''} ${className}`}>
-      <span className="chip-content">{children}</span>
-      {removable && (
-        <button
-          type="button"
-          className="chip-remove"
-          onClick={handleRemove}
-          onKeyDown={handleKeyDown}
-          disabled={disabled}
-          aria-label="Remove"
-        >
-          ×
-        </button>
-      )}
-    </span>
+    <GlassSurface
+      height={chipHeight}
+      hugWidth={true}
+      borderRadius={999}
+      className={className}
+    >
+      <span className={`chip ${variant} ${size} ${disabled ? "disabled" : ""}`}>
+        <span className="chip-content">{children}</span>
+        {removable && (
+          <button
+            type="button"
+            className="chip-remove"
+            onClick={handleRemove}
+            onKeyDown={handleKeyDown}
+            disabled={disabled}
+            aria-label="Remove"
+          >
+            ×
+          </button>
+        )}
+      </span>
+    </GlassSurface>
   );
 };
-
