@@ -1,0 +1,9 @@
+.pane {
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-base);
+  background-color: var(--background-color-dark);
+  color: var(--text-color-inverse);
+  box-shadow: var(--glass-shadow-sm);
+  backdrop-filter: saturate(180%) blur(2px);
+  transition: backdrop-filter var(--transition-normal);
+}

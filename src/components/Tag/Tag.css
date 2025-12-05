@@ -1,0 +1,59 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  background-color: var(--background-color-dark);
+  box-shadow: var(--glass-shadow-sm);
+  backdrop-filter: saturate(180%) blur(2px);
+}
+
+.tag.small {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-xs);
+  height: 18px;
+}
+
+.tag.medium {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  height: 20px;
+}
+
+.tag.large {
+  padding: var(--spacing-md) var(--spacing-base);
+  font-size: var(--font-size-sm);
+  height: 24px;
+}
+
+.tag.default {
+  background-color: var(--background-color-light);
+  color: var(--text-color);
+}
+
+.tag.primary {
+  background-color: var(--color-primary-200);
+  color: var(--color-primary);
+}
+
+.tag.secondary {
+  background-color: var(--color-secondary-200);
+  color: var(--color-secondary);
+}
+
+.tag.success {
+  background-color: var(--color-success-200);
+  color: var(--color-success);
+}
+
+.tag.error {
+  background-color: var(--color-error-200);
+  color: var(--color-error);
+}
+
+.tag.warning {
+  background-color: var(--color-warning-200);
+  color: var(--color-warning);
+}
+

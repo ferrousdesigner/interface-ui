@@ -1,0 +1,241 @@
+.progress-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+.progress-svg-filters {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.progress-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-color);
+  text-align: right;
+}
+
+/* Progress Track Base Styles */
+.progress-track {
+  --checked: hsl(
+    var(--hue, 200),
+    calc((8 + (var(--complete) / 100 * (92))) * 1%),
+    calc((81 - (var(--complete) / 100 * (81 - 43))) * 1%)
+  );
+  --transition: 0.3s;
+  --ease: ease-out;
+  --border: 2px;
+
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-full);
+  background-color: var(--background-color-dark);
+  box-shadow: var(--glass-shadow-sm);
+  backdrop-filter: saturate(180%) blur(2px);
+  overflow: visible;
+  container-type: inline-size;
+}
+
+/* Size variants */
+.progress-track.small {
+  height: 4px;
+  --border: 1px;
+}
+
+.progress-track.medium {
+  height: 6px;
+  --border: 2px;
+}
+
+.progress-track.large {
+  height: 8px;
+  --border: 2px;
+}
+
+/* Progress Knockout Effect */
+.progress-knockout {
+  height: 100%;
+  width: 100%;
+  border-radius: var(--radius-full);
+  filter: url(#progress-remove-black);
+  position: absolute;
+  inset: 0;
+  will-change: filter;
+  transform: translate3d(0, 0, 0);
+}
+
+.progress-indicator {
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  height: 100%;
+  width: 100%;
+  background: var(--checked);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress-indicator--masked {
+  background: var(--checked);
+  z-index: 12;
+  height: 100%;
+  width: 100%;
+  container-type: inline-size;
+}
+
+.progress-indicator--masked .progress-mask {
+  position: absolute;
+  height: calc(100% - (2 * var(--border)));
+  width: calc(var(--complete) * 1%);
+  top: var(--border);
+  left: var(--border);
+  background: #000;
+  border-radius: var(--radius-full);
+  transition-property: width;
+  transition-duration: var(--transition);
+  transition-timing-function: var(--ease);
+  will-change: width;
+}
+
+/* Progress Fill Liquid */
+.progress-fill-liquid {
+  position: absolute;
+  height: calc(100% - (2 * var(--border)));
+  width: calc(var(--complete) * 1%);
+  container-type: inline-size;
+  top: var(--border);
+  left: var(--border);
+  background: transparent;
+  border-radius: var(--radius-full);
+  transition-property: width;
+  transition-duration: var(--transition);
+  transition-timing-function: var(--ease);
+  min-width: 0;
+  max-width: calc(100% - (2 * var(--border)));
+  z-index: 10;
+}
+
+.progress-wrapper-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  clip-path: inset(0 0 0 0 round 100px);
+  filter: blur(2px);
+  transition: filter var(--transition) var(--ease);
+  overflow: hidden;
+}
+
+.progress-liquids {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(0, 0, 0);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  filter: url(#progress-goo);
+}
+
+.progress-liquid-shadow {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0px 0px 2px 2px var(--checked),
+    inset calc(((var(--complete) / 100) * 4px) + -2px) 0px 2px 2px var(--checked);
+  border-radius: var(--radius-full);
+}
+
+.progress-liquid-track {
+  content: '';
+  height: 100%;
+  width: 100%;
+  background: var(--checked);
+  border-radius: var(--radius-full);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition-property: width, background;
+  transition-duration: var(--transition);
+  transition-timing-function: var(--ease);
+}
+
+.progress-fill-liquid .progress-shadow {
+  opacity: 0.6;
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  box-shadow: 0px -1px 1px hsl(0 0% 100% / 0.4) inset,
+    0px 1px 1px hsl(0 0% 30% / 0.3) inset,
+    0px 1px 2px hsl(0 0% 30% / 0.2);
+  z-index: 20;
+  transition: opacity var(--transition) var(--ease);
+}
+
+.progress-fill-liquid .progress-cover {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-radius: var(--radius-full);
+  transition: opacity var(--transition) var(--ease);
+}
+
+/* Variant Colors */
+.progress-track.default {
+  --hue: 200;
+}
+
+.progress-track.success {
+  --hue: 144;
+}
+
+.progress-track.warning {
+  --hue: 45;
+}
+
+.progress-track.error {
+  --hue: 0;
+}
+
+/* Indeterminate Mode */
+.progress-track.indeterminate .progress-fill-liquid {
+  width: 30%;
+  animation: progress-indeterminate-liquid 1.5s ease-in-out infinite;
+}
+
+.progress-track.indeterminate .progress-indicator--masked .progress-mask {
+  width: 30%;
+  animation: progress-indeterminate-liquid 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-indeterminate-liquid {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(400%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(400%);
+    opacity: 0.8;
+  }
+}
+
+/* Smooth transitions for value changes */
+.progress-track:not(.indeterminate) .progress-fill-liquid {
+  transition: width var(--transition) var(--ease);
+}
+
+.progress-track:not(.indeterminate) .progress-indicator--masked .progress-mask {
+  transition: width var(--transition) var(--ease);
+}
+

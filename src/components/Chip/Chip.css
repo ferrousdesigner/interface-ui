@@ -1,0 +1,106 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  border-radius: var(--radius-2xl);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  background-color: var(--background-color-dark);
+  box-shadow: var(--glass-shadow-sm);
+  backdrop-filter: saturate(180%) blur(2px);
+  transition: backdrop-filter var(--transition-base), box-shadow var(--transition-base);
+}
+
+.chip.small {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  height: 24px;
+}
+
+.chip.medium {
+  padding: var(--spacing-md) var(--spacing-base);
+  font-size: var(--font-size-sm);
+  height: 28px;
+}
+
+.chip.large {
+  padding: var(--spacing-sm) var(--spacing-base);
+  font-size: var(--font-size-base);
+  height: 32px;
+}
+
+.chip-content {
+  display: flex;
+  align-items: center;
+}
+
+.chip-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: var(--radius-full);
+  background-color: var(--background-color-dark);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  transition: background-color var(--transition-base), color var(--transition-base);
+  flex-shrink: 0;
+}
+
+.chip-remove:hover:not(:disabled) {
+  background-color: var(--background-color-light);
+  color: var(--text-color-inverse);
+}
+
+.chip-remove:focus {
+  outline: none;
+  background-color: var(--background-color-light);
+  box-shadow: 0 0 0 2px var(--color-accent-300);
+}
+
+.chip-remove:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chip.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chip.default {
+  background-color: var(--background-color-light);
+  color: var(--text-color-inverse);
+}
+
+.chip.primary {
+  background-color: var(--color-primary-200);
+  color: var(--color-primary);
+}
+
+.chip.secondary {
+  background-color: var(--color-secondary-200);
+  color: var(--color-secondary);
+}
+
+.chip.success {
+  background-color: var(--color-success-200);
+  color: var(--color-success);
+}
+
+.chip.error {
+  background-color: var(--color-error-200);
+  color: var(--color-error);
+}
+
+.chip.warning {
+  background-color: var(--color-warning-200);
+  color: var(--color-warning);
+}
+

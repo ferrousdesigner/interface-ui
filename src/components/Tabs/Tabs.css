@@ -1,0 +1,56 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tabs-header {
+  display: flex;
+  gap: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-base);
+}
+
+.tab-button {
+  padding: var(--spacing-base) var(--spacing-base);
+  border: none;
+  background-color: var(--background-color-dark);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition-base), border-color var(--transition-base), backdrop-filter var(--transition-base), box-shadow var(--transition-base);
+  outline: none;
+  box-shadow: var(--glass-shadow-sm);
+  backdrop-filter: saturate(180%) blur(2px);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.tab-button:hover:not(:disabled) {
+  color: var(--text-color-inverse);
+}
+
+.tab-button.active {
+  color: var(--text-color-inverse);
+  border-bottom-color: var(--color-accent-600);
+  backdrop-filter: saturate(180%) blur(3px);
+  box-shadow: var(--glass-shadow-md);
+}
+
+.tab-button:focus {
+  outline: none;
+  box-shadow: var(--glass-shadow-sm), 0 0 0 2px var(--color-accent-300);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.tab-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tabs-content {
+  padding: var(--spacing-base) 0;
+  color: var(--text-color-inverse);
+}
+

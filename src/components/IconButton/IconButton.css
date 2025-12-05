@@ -1,0 +1,69 @@
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background-color: var(--background-color-dark);
+  color: var(--text-color-inverse);
+  box-shadow: var(--glass-shadow-sm);
+  backdrop-filter: saturate(180%) blur(2px);
+  transition: backdrop-filter var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+  outline: none;
+  padding: 0;
+}
+
+.icon-button.small {
+  width: 32px;
+  height: 32px;
+  font-size: var(--font-size-base);
+}
+
+.icon-button.medium {
+  width: 40px;
+  height: 40px;
+  font-size: var(--font-size-xl);
+}
+
+.icon-button.large {
+  width: 48px;
+  height: 48px;
+  font-size: var(--font-size-2xl);
+}
+
+.icon-button:hover:not(:disabled) {
+  backdrop-filter: saturate(180%) blur(3px);
+}
+
+.icon-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.icon-button:focus {
+  box-shadow: var(--glass-shadow-sm),
+    0 0 0 2px var(--color-accent-300);
+}
+
+.icon-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  backdrop-filter: saturate(180%) blur(1px);
+}
+
+.icon-button.primary {
+  background-color: var(--color-primary-100);
+}
+
+.icon-button.secondary {
+  background-color: var(--color-secondary-100);
+}
+
+.icon-button.ghost {
+  background-color: var(--background-color-dark);
+}
+
+.icon-button.ghost:hover:not(:disabled) {
+  background-color: var(--background-color-light);
+}
+

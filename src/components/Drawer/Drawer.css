@@ -1,0 +1,144 @@
+.drawer-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: var(--z-index-modal-backdrop);
+  animation: fadeIn var(--transition-normal);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.drawer {
+  position: fixed;
+  background-color: var(--background-color-dark);
+  box-shadow: var(--glass-shadow-lg);
+  backdrop-filter: saturate(180%) blur(4px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: var(--z-index-modal);
+}
+
+.drawer-left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  animation: slideInLeft 0.3s ease;
+}
+
+.drawer-right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  animation: slideInRight 0.3s ease;
+}
+
+.drawer-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  animation: slideInTop 0.3s ease;
+}
+
+.drawer-bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  animation: slideInBottom 0.3s ease;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInTop {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInBottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-xl) var(--spacing-2xl);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.drawer-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color-inverse);
+}
+
+.drawer-close {
+  width: var(--spacing-2xl);
+  height: var(--spacing-2xl);
+  border: none;
+  border-radius: var(--radius-sm);
+  background-color: var(--background-color-dark);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-xl);
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-base), color var(--transition-base);
+  outline: none;
+}
+
+.drawer-close:hover {
+  background-color: var(--background-color-light);
+  color: var(--text-color-inverse);
+}
+
+.drawer-close:focus {
+  box-shadow: 0 0 0 2px var(--color-accent-300);
+}
+
+.drawer-body {
+  padding: var(--spacing-2xl);
+  color: var(--text-color-inverse);
+  overflow-y: auto;
+  flex: 1;
+}
+

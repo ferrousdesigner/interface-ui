@@ -1,0 +1,89 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.3),
+    inset -2px -2px 2px 1px rgba(255, 255, 255, 0.3),
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: saturate(180%) blur(4px);
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.5), 
+    backdrop-filter var(--transition-base), 
+    box-shadow var(--transition-base), 
+    transform var(--transition-base);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.card.outlined {
+  box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.3),
+    inset -2px -2px 2px 1px rgba(255, 255, 255, 0.3),
+    0 0 0 1px var(--glass-inner-border),
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card.elevated {
+  box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.3),
+    inset -2px -2px 2px 1px rgba(255, 255, 255, 0.3),
+    var(--shadow-lg),
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card.hoverable:hover {
+  backdrop-filter: saturate(180%) blur(4px);
+  transform: translateY(calc(var(--spacing-xs) * -1)) scale(1.02);
+}
+
+.card.clickable {
+  cursor: pointer;
+}
+
+.card.clickable:hover {
+  transform: translateY(calc(var(--spacing-xs) * -1)) scale(1.02);
+}
+
+.card.clickable:focus {
+  outline: none;
+  box-shadow: inset 2px 2px 1px 0 rgba(255, 255, 255, 0.3),
+    inset -2px -2px 2px 1px rgba(255, 255, 255, 0.3),
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.2),
+    0 0 0 2px var(--color-accent-300);
+}
+
+.card.clickable:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.card-header {
+  padding: var(--spacing-xl) var(--spacing-xl) var(--spacing-base) var(--spacing-xl);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-color-inverse);
+}
+
+.card.has-image .card-header {
+  padding-top: var(--spacing-base);
+}
+
+.card-body {
+  padding: 0 var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
+  color: var(--text-color-inverse);
+  flex: 1;
+}
+
+.card-footer {
+  padding: var(--spacing-base) var(--spacing-xl) var(--spacing-xl) var(--spacing-xl);
+  border-top: 1px solid var(--border-color);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-sm);
+}

@@ -1,0 +1,94 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  width: 100%;
+}
+
+.accordion-item {
+  border-radius: var(--radius-md);
+  background-color: var(--background-color-dark);
+  box-shadow: var(--glass-shadow-sm);
+  backdrop-filter: saturate(180%) blur(2px);
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: var(--spacing-base) var(--spacing-base);
+  border: none;
+  background-color: var(--background-color-dark);
+  color: var(--text-color-inverse);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-base);
+  transition: backdrop-filter var(--transition-base);
+  outline: none;
+}
+
+.accordion-header:hover:not(:disabled) {
+  backdrop-filter: saturate(180%) blur(3px);
+}
+
+.accordion-header:focus {
+  box-shadow: 0 0 0 2px var(--color-accent-300);
+}
+
+.accordion-header.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.accordion-header-content {
+  flex: 1;
+  text-align: left;
+}
+
+.accordion-arrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.accordion-arrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid var(--text-color-inverse);
+  border-bottom: 2px solid var(--text-color-inverse);
+  transform: rotate(-45deg);
+  transition: transform var(--transition-slow) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.accordion-header.open .accordion-arrow::before {
+  transform: rotate(45deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease-out, padding var(--transition-slow);
+  opacity: 0;
+  padding: 0;
+}
+
+.accordion-content.open {
+  max-height: 1000px;
+  opacity: 1;
+  padding: var(--spacing-base) 0;
+}
+
+.accordion-content-inner {
+  padding: 0 var(--spacing-base) var(--spacing-base) var(--spacing-base);
+  color: var(--text-color-inverse);
+  font-size: var(--font-size-sm);
+}
+

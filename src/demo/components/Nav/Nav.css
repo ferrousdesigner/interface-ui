@@ -1,0 +1,23 @@
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 10px;
+}
+.nav-left-logo {
+  font-size: 24px;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+.nav-right {
+  display: flex;
+  gap: 10px;
+}
+.nav-left-logo-span {
+  color: #fff;
+  font-weight: 600;
+}
