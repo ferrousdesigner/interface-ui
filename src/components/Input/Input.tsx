@@ -1,5 +1,6 @@
-import React from 'react';
-import './Input.css';
+import React from "react";
+import GlassSurface from "../GlassSurface/GlassSurface";
+import "./Input.css";
 
 export interface InputProps {
   /**
@@ -21,7 +22,7 @@ export interface InputProps {
   /**
    * Input type
    */
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search";
   /**
    * Whether the input is disabled
    */
@@ -33,7 +34,7 @@ export interface InputProps {
   /**
    * Validation state
    */
-  variant?: 'default' | 'error' | 'success' | 'warning';
+  variant?: "default" | "error" | "success" | "warning";
   /**
    * Error message to display
    */
@@ -69,10 +70,10 @@ export const Input: React.FC<InputProps> = ({
   placeholder,
   value,
   defaultValue,
-  type = 'text',
+  type = "text",
   disabled = false,
   required = false,
-  variant = 'default',
+  variant = "default",
   error,
   helperText,
   onChange,
@@ -82,7 +83,7 @@ export const Input: React.FC<InputProps> = ({
   id,
 }) => {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
-  const hasError = variant === 'error' || !!error;
+  const hasError = variant === "error" || !!error;
   const displayHelperText = error || helperText;
 
   return (
@@ -93,26 +94,30 @@ export const Input: React.FC<InputProps> = ({
           {required && <span className="input-required">*</span>}
         </label>
       )}
-      <input
-        id={inputId}
-        name={name}
-        type={type}
-        value={value}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        disabled={disabled}
-        required={required}
-        className={`input ${variant} ${hasError ? 'error' : ''} ${disabled ? 'disabled' : ''}`}
-        onChange={onChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        aria-invalid={hasError}
-        aria-describedby={displayHelperText ? `${inputId}-helper` : undefined}
-      />
+      <GlassSurface hugWidth={true} height={50}>
+        <input
+          id={inputId}
+          name={name}
+          type={type}
+          value={value}
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          disabled={disabled}
+          required={required}
+          className={`input ${variant} ${hasError ? "error" : ""} ${
+            disabled ? "disabled" : ""
+          }`}
+          onChange={onChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          aria-invalid={hasError}
+          aria-describedby={displayHelperText ? `${inputId}-helper` : undefined}
+        />
+      </GlassSurface>
       {displayHelperText && (
         <span
           id={`${inputId}-helper`}
-          className={`input-helper ${hasError ? 'error' : ''}`}
+          className={`input-helper ${hasError ? "error" : ""}`}
         >
           {displayHelperText}
         </span>
@@ -120,4 +125,3 @@ export const Input: React.FC<InputProps> = ({
     </div>
   );
 };
-
