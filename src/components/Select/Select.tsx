@@ -1,6 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { validateArrayStructure, validateValueInOptions } from '../../utils/validation';
-import './Select.css';
+import React, { useState, useRef, useEffect } from "react";
+import {
+  validateArrayStructure,
+  validateValueInOptions,
+} from "../../utils/validation";
+import GlassSurface from "../GlassSurface/GlassSurface";
+import "./Select.css";
 
 export interface SelectOption {
   value: string;
@@ -40,7 +44,7 @@ export interface SelectProps {
   /**
    * Validation state
    */
-  variant?: 'default' | 'error' | 'success' | 'warning';
+  variant?: "default" | "error" | "success" | "warning";
   /**
    * Error message to display
    */
@@ -68,10 +72,10 @@ export const Select: React.FC<SelectProps> = ({
   options,
   value: controlledValue,
   defaultValue,
-  placeholder = 'Select an option...',
+  placeholder = "Select an option...",
   disabled = false,
   required = false,
-  variant = 'default',
+  variant = "default",
   error,
   helperText,
   onChange,
@@ -79,46 +83,55 @@ export const Select: React.FC<SelectProps> = ({
   id,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [internalValue, setInternalValue] = useState(defaultValue || '');
+  const [internalValue, setInternalValue] = useState(defaultValue || "");
   const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const isControlled = controlledValue !== undefined;
   const value = isControlled ? controlledValue : internalValue;
-  const hasError = variant === 'error' || !!error;
+  const hasError = variant === "error" || !!error;
   const displayHelperText = error || helperText;
 
-  const selectedOption = options.find(opt => opt.value === value);
+  const selectedOption = options.find((opt) => opt.value === value);
 
   // Prop validation
   useEffect(() => {
-    validateArrayStructure(options, ['value', 'label'], 'Select', 'options');
-    if (value !== undefined && value !== '') {
-      validateValueInOptions(value, options, 'Select', 'value', opt => opt.value);
+    validateArrayStructure(options, ["value", "label"], "Select", "options");
+    if (value !== undefined && value !== "") {
+      validateValueInOptions(
+        value,
+        options.map((opt: SelectOption) => opt.value),
+        "Select",
+        "value"
+      );
     }
   }, [options, value]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isOpen) {
+      if (event.key === "Escape" && isOpen) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
   const handleSelect = (optionValue: string) => {
@@ -131,24 +144,26 @@ export const Select: React.FC<SelectProps> = ({
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (disabled) return;
-    
-    if (e.key === 'Enter' || e.key === ' ') {
+
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       setIsOpen(!isOpen);
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === "ArrowDown") {
       e.preventDefault();
       if (!isOpen) {
         setIsOpen(true);
       } else {
-        const currentIndex = options.findIndex(opt => opt.value === value);
-        const nextIndex = currentIndex < options.length - 1 ? currentIndex + 1 : 0;
+        const currentIndex = options.findIndex((opt) => opt.value === value);
+        const nextIndex =
+          currentIndex < options.length - 1 ? currentIndex + 1 : 0;
         handleSelect(options[nextIndex].value);
       }
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
       if (isOpen) {
-        const currentIndex = options.findIndex(opt => opt.value === value);
-        const prevIndex = currentIndex > 0 ? currentIndex - 1 : options.length - 1;
+        const currentIndex = options.findIndex((opt) => opt.value === value);
+        const prevIndex =
+          currentIndex > 0 ? currentIndex - 1 : options.length - 1;
         handleSelect(options[prevIndex].value);
       }
     }
@@ -163,49 +178,80 @@ export const Select: React.FC<SelectProps> = ({
         </label>
       )}
       <div className="select-container">
-        <button
-          id={selectId}
-          type="button"
-          role="combobox"
-          aria-expanded={isOpen}
-          aria-haspopup="listbox"
-          aria-controls={`${selectId}-listbox`}
-          disabled={disabled}
-          className={`select-trigger ${variant} ${hasError ? 'error' : ''} ${disabled ? 'disabled' : ''} ${isOpen ? 'open' : ''}`}
-          onClick={() => !disabled && setIsOpen(!isOpen)}
-          onKeyDown={handleKeyDown}
-          aria-invalid={hasError}
-          aria-describedby={displayHelperText ? `${selectId}-helper` : undefined}
-        >
-          <span className={!selectedOption ? 'select-placeholder' : ''}>
-            {selectedOption ? selectedOption.label : placeholder}
-          </span>
-          <span className="select-arrow"></span>
-        </button>
-        {isOpen && (
-          <ul
-            id={`${selectId}-listbox`}
-            role="listbox"
-            className="select-dropdown"
+        <GlassSurface hugWidth={false} width="100%" height={50}>
+          <button
+            id={selectId}
+            type="button"
+            role="combobox"
+            aria-expanded={isOpen}
+            aria-haspopup="listbox"
+            aria-controls={`${selectId}-listbox`}
+            disabled={disabled}
+            className={`select-trigger ${variant} ${hasError ? "error" : ""} ${
+              disabled ? "disabled" : ""
+            } ${isOpen ? "open" : ""}`}
+            onClick={() => !disabled && setIsOpen(!isOpen)}
+            onKeyDown={handleKeyDown}
+            aria-invalid={hasError}
+            aria-describedby={
+              displayHelperText ? `${selectId}-helper` : undefined
+            }
           >
-            {options.map((option) => (
-              <li
-                key={option.value}
-                role="option"
-                aria-selected={option.value === value}
-                className={`select-option ${option.value === value ? 'selected' : ''} ${option.disabled ? 'disabled' : ''}`}
-                onClick={() => !option.disabled && handleSelect(option.value)}
-              >
-                {option.label}
-              </li>
-            ))}
-          </ul>
+            <span className={!selectedOption ? "select-placeholder" : ""}>
+              {selectedOption ? selectedOption.label : placeholder}
+            </span>
+            <span className="select-arrow"></span>
+          </button>
+        </GlassSurface>
+        {isOpen && (
+          <GlassSurface
+            hugWidth={true}
+            height="auto"
+            className="select-dropdown-wrapper"
+          >
+            <ul
+              id={`${selectId}-listbox`}
+              role="listbox"
+              className="select-dropdown"
+            >
+              {options.map((option) => {
+                const isSelected = option.value === value;
+                return (
+                  <li
+                    key={option.value}
+                    role="option"
+                    aria-selected={isSelected}
+                    className={`select-option ${isSelected ? "selected" : ""} ${
+                      option.disabled ? "disabled" : ""
+                    }`}
+                    onClick={() =>
+                      !option.disabled && handleSelect(option.value)
+                    }
+                  >
+                    {isSelected ? (
+                      <GlassSurface
+                        hugWidth={false}
+                        width="100%"
+                        height="auto"
+                        className="select-option-glass"
+                        borderRadius={8}
+                      >
+                        {option.label}
+                      </GlassSurface>
+                    ) : (
+                      option.label
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </GlassSurface>
         )}
       </div>
       {displayHelperText && (
         <span
           id={`${selectId}-helper`}
-          className={`select-helper ${hasError ? 'error' : ''}`}
+          className={`select-helper ${hasError ? "error" : ""}`}
         >
           {displayHelperText}
         </span>
@@ -223,7 +269,11 @@ export const Select: React.FC<SelectProps> = ({
       >
         <option value="">{placeholder}</option>
         {options.map((option) => (
-          <option key={option.value} value={option.value} disabled={option.disabled}>
+          <option
+            key={option.value}
+            value={option.value}
+            disabled={option.disabled}
+          >
             {option.label}
           </option>
         ))}
@@ -231,4 +281,3 @@ export const Select: React.FC<SelectProps> = ({
     </div>
   );
 };
-
