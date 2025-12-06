@@ -10,6 +10,8 @@
   outline: none;
   padding: 0;
   transform: none !important;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .icon-button.small {

@@ -211,6 +211,12 @@
   box-shadow: var(--shadow-md);
 }
 
+.demo-icon-button-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
 .demo-component-item-wide {
   grid-column: 1 / -1;
 }

@@ -304,7 +304,10 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">IconButton</div>
-              <IconButton icon="⚙" aria-label="Settings" />
+              <div className="demo-icon-button-group">
+                <IconButton icon="⚙" size="medium" aria-label="Settings" />
+                <IconButton icon="⚙" size="large" aria-label="Settings" />
+              </div>
             </div>
           </div>
         </div>

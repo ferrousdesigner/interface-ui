@@ -43,7 +43,7 @@ export const IconButton: React.FC<IconButtonProps> = ({
   className = "",
 }) => {
   return (
-    <GlassSurface hugWidth={true} height={40}>
+    <GlassSurface hugWidth={false} width="40px" height={40}>
       <button
         className={`icon-button ${variant} ${size} ${
           disabled ? "disabled" : ""
