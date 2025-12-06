@@ -27,8 +27,6 @@
   font-family: inherit;
   background-color: var(--background-color-dark);
   color: var(--text-color-inverse);
-  box-shadow: var(--glass-shadow-sm);
-  backdrop-filter: saturate(180%) blur(2px);
   transition: backdrop-filter var(--transition-base), box-shadow var(--transition-base);
   outline: none;
   resize: vertical;
@@ -46,9 +44,9 @@
 }
 
 .textarea:focus {
-  backdrop-filter: saturate(180%) blur(3px);
-  box-shadow: var(--glass-shadow-sm),
-    0 0 0 2px var(--color-accent-300);
+  /* backdrop-filter: saturate(180%) blur(3px); */
+  /* box-shadow: var(--glass-shadow-sm), */
+  /* 0 0 0 2px var(--color-accent-300); */
 }
 
 .textarea:hover:not(:disabled):not(:focus) {
@@ -99,4 +97,3 @@
   font-size: var(--font-size-xs);
   color: rgba(255, 255, 255, 0.7);
 }
-

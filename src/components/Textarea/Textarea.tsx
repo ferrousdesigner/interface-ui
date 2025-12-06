@@ -1,5 +1,6 @@
-import React from 'react';
-import './Textarea.css';
+import React from "react";
+import "./Textarea.css";
+import GlassSurface from "../GlassSurface/GlassSurface";
 
 export interface TextareaProps {
   /**
@@ -41,7 +42,7 @@ export interface TextareaProps {
   /**
    * Validation state
    */
-  variant?: 'default' | 'error' | 'success' | 'warning';
+  variant?: "default" | "error" | "success" | "warning";
   /**
    * Error message to display
    */
@@ -82,7 +83,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   required = false,
   resizable = true,
   maxLength,
-  variant = 'default',
+  variant = "default",
   error,
   helperText,
   onChange,
@@ -91,8 +92,9 @@ export const Textarea: React.FC<TextareaProps> = ({
   name,
   id,
 }) => {
-  const textareaId = id || `textarea-${Math.random().toString(36).substr(2, 9)}`;
-  const hasError = variant === 'error' || !!error;
+  const textareaId =
+    id || `textarea-${Math.random().toString(36).substr(2, 9)}`;
+  const hasError = variant === "error" || !!error;
   const displayHelperText = error || helperText;
   const currentLength = value?.length || 0;
 
@@ -104,29 +106,35 @@ export const Textarea: React.FC<TextareaProps> = ({
           {required && <span className="textarea-required">*</span>}
         </label>
       )}
-      <textarea
-        id={textareaId}
-        name={name}
-        value={value}
-        defaultValue={defaultValue}
-        placeholder={placeholder}
-        rows={rows}
-        disabled={disabled}
-        required={required}
-        maxLength={maxLength}
-        className={`textarea ${variant} ${hasError ? 'error' : ''} ${disabled ? 'disabled' : ''} ${!resizable ? 'no-resize' : ''}`}
-        onChange={onChange}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        aria-invalid={hasError}
-        aria-describedby={displayHelperText || maxLength ? `${textareaId}-helper` : undefined}
-      />
+      <GlassSurface hugWidth={true} height={100}>
+        <textarea
+          id={textareaId}
+          name={name}
+          value={value}
+          defaultValue={defaultValue}
+          placeholder={placeholder}
+          rows={rows}
+          disabled={disabled}
+          required={required}
+          maxLength={maxLength}
+          className={`textarea ${variant} ${hasError ? "error" : ""} ${
+            disabled ? "disabled" : ""
+          } ${!resizable ? "no-resize" : ""}`}
+          onChange={onChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          aria-invalid={hasError}
+          aria-describedby={
+            displayHelperText || maxLength ? `${textareaId}-helper` : undefined
+          }
+        />
+      </GlassSurface>
       {(displayHelperText || maxLength) && (
         <div className="textarea-footer">
           {displayHelperText && (
             <span
               id={`${textareaId}-helper`}
-              className={`textarea-helper ${hasError ? 'error' : ''}`}
+              className={`textarea-helper ${hasError ? "error" : ""}`}
             >
               {displayHelperText}
             </span>
@@ -141,4 +149,3 @@ export const Textarea: React.FC<TextareaProps> = ({
     </div>
   );
 };
-
