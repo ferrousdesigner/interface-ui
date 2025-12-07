@@ -1,52 +1,15 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import gsap from 'gsap';
-import { Draggable } from 'gsap/Draggable';
-import { validateRange, validatePositive } from '../../utils/validation';
-import './Slider.css';
-
-gsap.registerPlugin(Draggable);
+import React, { useRef, useEffect, useState } from "react";
+import "./Slider.css";
 
 export interface SliderProps {
   /**
-   * The label for the slider
-   */
-  label?: string;
-  /**
-   * Minimum value
-   */
-  min?: number;
-  /**
-   * Maximum value
-   */
-  max?: number;
-  /**
-   * Step value
-   */
-  step?: number;
-  /**
-   * Current value (controlled)
+   * Initial value (0-100)
    */
   value?: number;
-  /**
-   * Default value (uncontrolled)
-   */
-  defaultValue?: number;
-  /**
-   * Whether the slider is disabled
-   */
-  disabled?: boolean;
-  /**
-   * Whether to show the value
-   */
-  showValue?: boolean;
   /**
    * Change handler
    */
   onChange?: (value: number) => void;
-  /**
-   * Slider name attribute
-   */
-  name?: string;
   /**
    * Slider id attribute
    */
@@ -54,386 +17,208 @@ export interface SliderProps {
 }
 
 export const Slider: React.FC<SliderProps> = ({
-  label,
-  min = 0,
-  max = 100,
-  step = 1,
-  value: controlledValue,
-  defaultValue = 0,
-  disabled = false,
-  showValue = false,
+  value: initialValue = 40,
   onChange,
-  name,
   id,
 }) => {
-  const [internalValue, setInternalValue] = useState(defaultValue);
-  const [isDragging, setIsDragging] = useState(false);
-  const [isActive, setIsActive] = useState(false);
-  const [complete, setComplete] = useState(defaultValue);
-  const sliderId = id || `slider-${Math.random().toString(36).substr(2, 9)}`;
   const sliderRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
-  const draggableRef = useRef<Draggable | null>(null);
-  const completeRef = useRef(complete);
-  const isDraggingRef = useRef(false);
-  const isControlled = controlledValue !== undefined;
-  const value = isControlled ? controlledValue : internalValue;
+  const [isDragging, setIsDragging] = useState(false);
+  const [sliderRect, setSliderRect] = useState<DOMRect | null>(null);
 
-  // Prop validation
-  useEffect(() => {
-    if (min >= max) {
-      console.warn('[Slider] min must be less than max. Got min:', min, 'max:', max);
+  const updateThumbAndProgress = (newPercent: number) => {
+    newPercent = Math.max(0, Math.min(100, newPercent));
+
+    if (progressRef.current && thumbRef.current && sliderRect) {
+      const px = (newPercent / 100) * sliderRect.width;
+      progressRef.current.style.width = `${newPercent}%`;
+      thumbRef.current.style.left = `${px}px`;
     }
-    validatePositive(step, 'Slider', 'step');
-    if (value !== undefined) {
-      validateRange(value, min, max, 'Slider', 'value');
-    }
-  }, [min, max, step, value]);
+  };
 
-  const percentage = Math.max(0, Math.min(100, ((value - min) / (max - min)) * 100));
-  
-  // Keep ref in sync with state
-  useEffect(() => {
-    completeRef.current = complete;
-  }, [complete]);
+  const getPercentFromClientX = (clientX: number): number => {
+    if (!sliderRect) return 0;
+    const offsetX = clientX - sliderRect.left;
+    return (offsetX / sliderRect.width) * 100;
+  };
 
-  // Update complete when value changes externally
+  const onMove = (clientX: number) => {
+    const newPercent = getPercentFromClientX(clientX);
+    updateThumbAndProgress(newPercent);
+    onChange?.(newPercent);
+  };
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!sliderRef.current) return;
+    setIsDragging(true);
+    setSliderRect(sliderRef.current.getBoundingClientRect());
+    onMove(e.clientX);
+    thumbRef.current?.classList.add("active");
+  };
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    if (!sliderRef.current) return;
+    setIsDragging(true);
+    setSliderRect(sliderRef.current.getBoundingClientRect());
+    onMove(e.touches[0].clientX);
+    thumbRef.current?.classList.add("active");
+  };
+
+  const stopDrag = () => {
+    setIsDragging(false);
+    thumbRef.current?.classList.remove("active");
+  };
+
+  // Initialize
   useEffect(() => {
-    const newComplete = ((value - min) / (max - min)) * 100;
-    setComplete(newComplete);
     if (sliderRef.current) {
-      sliderRef.current.style.setProperty('--complete', `${newComplete}`);
+      const rect = sliderRef.current.getBoundingClientRect();
+      setSliderRect(rect);
+      updateThumbAndProgress(initialValue);
     }
-  }, [value, min, max]);
+  }, [initialValue]);
 
-  const handleChange = useCallback((newValue: number) => {
-    const clampedValue = Math.max(min, Math.min(max, newValue));
-    const steppedValue = Math.round(clampedValue / step) * step;
-    const finalValue = Math.max(min, Math.min(max, steppedValue));
-    
-    if (!isControlled) {
-      setInternalValue(finalValue);
-    }
-    onChange?.(finalValue);
-  }, [min, max, step, isControlled, onChange]);
-
-  // Initialize GSAP Draggable
+  // Update when external value changes
   useEffect(() => {
-    if (!sliderRef.current || !thumbRef.current || disabled) return;
+    if (!isDragging) {
+      updateThumbAndProgress(initialValue);
+    }
+  }, [initialValue, isDragging]);
 
-    const track = sliderRef.current;
-    const thumb = thumbRef.current;
-
-    const proxy = document.createElement('div');
-    proxy.style.position = 'absolute';
-    proxy.style.width = '1px';
-    proxy.style.height = '1px';
-    proxy.style.opacity = '0';
-    proxy.style.pointerEvents = 'none';
-    document.body.appendChild(proxy);
-
-    const updateThumbPosition = (percentage: number) => {
-      thumb.style.left = `${percentage}%`;
-    };
-
-    const draggable = Draggable.create(proxy, {
-      allowContextMenu: true,
-      handle: thumb,
-      type: 'x',
-      onDragStart: function () {
-        isDraggingRef.current = true;
-        setIsDragging(true);
-        setIsActive(true);
-      },
-      onDrag: function () {
-        const trackBounds = track.getBoundingClientRect();
-        const thumbBounds = thumb.getBoundingClientRect();
-        const thumbWidth = thumbBounds.width;
-        
-        // Get pointer position relative to track
-        const pointerX = this.pointerX - trackBounds.left;
-        
-        // Calculate bounds - thumb center can move from half thumb width to track width minus half thumb width
-        const minX = thumbWidth / 2;
-        const maxX = trackBounds.width - thumbWidth / 2;
-        
-        // Clamp pointer position to bounds
-        const clampedX = gsap.utils.clamp(minX, maxX, pointerX);
-        
-        // Convert to percentage
-        const percentage = gsap.utils.mapRange(minX, maxX, 0, 100, clampedX);
-        
-        // Convert to value
-        const newValue = min + (percentage / 100) * (max - min);
-        const steppedValue = Math.round(newValue / step) * step;
-        const finalValue = Math.max(min, Math.min(max, steppedValue));
-        const finalPercentage = ((finalValue - min) / (max - min)) * 100;
-        
-        setComplete(finalPercentage);
-        if (track) {
-          track.style.setProperty('--complete', `${finalPercentage}`);
-          track.style.setProperty('--delta', `${Math.min(Math.abs(this.deltaX || 0), 12)}`);
-        }
-        
-        // Update thumb position
-        updateThumbPosition(finalPercentage);
-        
-        // Update value
-        handleChange(finalValue);
-      },
-      onDragEnd: function () {
-        const trackBounds = track.getBoundingClientRect();
-        const thumbBounds = thumb.getBoundingClientRect();
-        const thumbWidth = thumbBounds.width;
-        
-        // Get final pointer position relative to track
-        const pointerX = this.pointerX - trackBounds.left;
-        const minX = thumbWidth / 2;
-        const maxX = trackBounds.width - thumbWidth / 2;
-        const clampedX = gsap.utils.clamp(minX, maxX, pointerX);
-        const percentage = gsap.utils.mapRange(minX, maxX, 0, 100, clampedX);
-        
-        const newValue = min + (percentage / 100) * (max - min);
-        const steppedValue = Math.round(newValue / step) * step;
-        const finalValue = Math.max(min, Math.min(max, steppedValue));
-        const finalPercentage = ((finalValue - min) / (max - min)) * 100;
-        
-        updateThumbPosition(finalPercentage);
-        
-        gsap.to({}, {
-          duration: 0.15,
-          onComplete: () => {
-            setIsActive(false);
-            setIsDragging(false);
-            isDraggingRef.current = false;
-            if (track) {
-              track.style.setProperty('--delta', '0');
-            }
-            setComplete(finalPercentage);
-            handleChange(finalValue);
-          },
-        });
-      },
-      onPress: function () {
-        if ('ontouchstart' in window && navigator.maxTouchPoints > 0) {
-          setIsActive(true);
-        }
-      },
-      onRelease: function () {
-        if (
-          'ontouchstart' in window &&
-          navigator.maxTouchPoints > 0 &&
-          ((this.startX !== undefined &&
-            this.endX !== undefined &&
-            Math.abs(this.endX - this.startX) < 4) ||
-            this.endX === undefined)
-        ) {
-          setIsActive(false);
-        }
-        if (track) {
-          track.style.setProperty('--delta', '0');
-        }
-      },
-    })[0];
-
-    draggableRef.current = draggable;
-
-    // Initialize thumb position
-    const initialPercentage = ((value - min) / (max - min)) * 100;
-    updateThumbPosition(initialPercentage);
-
-    return () => {
-      draggable.kill();
-      if (proxy.parentNode) {
-        proxy.parentNode.removeChild(proxy);
+  // Mouse move handler
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        onMove(e.clientX);
       }
     };
-  }, [disabled, min, max, step, value, handleChange]);
 
-  // Handle track click
-  const handleTrackClick = useCallback((e: React.MouseEvent) => {
-    if (disabled || !sliderRef.current || !thumbRef.current) return;
-    if (e.target === thumbRef.current || thumbRef.current.contains(e.target as Node)) {
-      return;
+    const onMouseUp = () => {
+      stopDrag();
+    };
+
+    if (isDragging) {
+      document.addEventListener("mousemove", onMouseMove);
+      document.addEventListener("mouseup", onMouseUp);
     }
-    
-    const rect = sliderRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    const newValue = min + (percentage / 100) * (max - min);
-    const steppedValue = Math.round(newValue / step) * step;
-    const finalValue = Math.max(min, Math.min(max, steppedValue));
-    
-    handleChange(finalValue);
-  }, [disabled, min, max, step, handleChange]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(Number(e.target.value));
+    return () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    };
+  }, [isDragging, sliderRect]);
+
+  // Touch move handler
+  useEffect(() => {
+    const onTouchMove = (e: TouchEvent) => {
+      if (isDragging) {
+        e.preventDefault();
+        onMove(e.touches[0].clientX);
+      }
+    };
+
+    const onTouchEnd = () => {
+      stopDrag();
+    };
+
+    if (isDragging) {
+      document.addEventListener("touchmove", onTouchMove, { passive: false });
+      document.addEventListener("touchend", onTouchEnd);
+    }
+
+    return () => {
+      document.removeEventListener("touchmove", onTouchMove);
+      document.removeEventListener("touchend", onTouchEnd);
+    };
+  }, [isDragging, sliderRect]);
+
+  // Handle slider click
+  const handleSliderClick = (e: React.MouseEvent) => {
+    if (!sliderRef.current) return;
+    setIsDragging(true);
+    setSliderRect(sliderRef.current.getBoundingClientRect());
+    thumbRef.current?.classList.add("active");
+    onMove(e.clientX);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (disabled) return;
-    const stepSize = step || 1;
-    let newValue = value;
-    
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-      e.preventDefault();
-      newValue = Math.max(min, value - stepSize);
-    } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      newValue = Math.min(max, value + stepSize);
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      newValue = min;
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      newValue = max;
-    }
-    
-    if (newValue !== value) {
-      handleChange(newValue);
-    }
+  const handleSliderTouchStart = (e: React.TouchEvent) => {
+    if (!sliderRef.current) return;
+    setIsDragging(true);
+    setSliderRect(sliderRef.current.getBoundingClientRect());
+    thumbRef.current?.classList.add("active");
+    onMove(e.touches[0].clientX);
   };
+
+  // Update rect on resize
+  useEffect(() => {
+    const updateRect = () => {
+      if (sliderRef.current) {
+        setSliderRect(sliderRef.current.getBoundingClientRect());
+      }
+    };
+
+    window.addEventListener("resize", updateRect);
+    return () => window.removeEventListener("resize", updateRect);
+  }, []);
 
   return (
     <>
-      <svg className="slider-svg-filters" aria-hidden="true">
-        <defs>
-          <filter id="slider-goo">
-            <feGaussianBlur
-              result="SvgjsFeGaussianBlur1000"
-              in="SourceGraphic"
-              stdDeviation="8"
-            />
-            <feColorMatrix
-              result="SvgjsFeColorMatrix1001"
-              in="SvgjsFeGaussianBlur1000"
-              values="
-                1 0 0 0 0
-                0 1 0 0 0
-                0 0 1 0 0
-                0 0 0 13 -10
-              "
-              type="matrix"
-            />
-            <feComposite
-              result="SvgjsFeComposite1002"
-              in="SvgjsFeColorMatrix1001"
-              operator="atop"
-            />
-          </filter>
-          <filter id="slider-knockout" colorInterpolationFilters="sRGB">
-            <feColorMatrix
-              result="knocked"
-              type="matrix"
-              values="1 0 0 0 0
-                      0 1 0 0 0
-                      0 0 1 0 0
-                      -1 -1 -1 1 0"
-            />
-            <feComponentTransfer>
-              <feFuncR type="linear" slope="3" intercept="-1" />
-              <feFuncG type="linear" slope="3" intercept="-1" />
-              <feFuncB type="linear" slope="3" intercept="-1" />
-            </feComponentTransfer>
-            <feComponentTransfer>
-              <feFuncR type="table" tableValues="0 0 0 0 0 1 1 1 1 1" />
-              <feFuncG type="table" tableValues="0 0 0 0 0 1 1 1 1 1" />
-              <feFuncB type="table" tableValues="0 0 0 0 0 1 1 1 1 1" />
-            </feComponentTransfer>
-          </filter>
-          <filter id="slider-remove-black" colorInterpolationFilters="sRGB">
-            <feColorMatrix
-              type="matrix"
-              values="1 0 0 0 0
-                      0 1 0 0 0
-                      0 0 1 0 0
-                      -255 -255 -255 0 1"
-              result="black-pixels"
-            />
-            <feMorphology
-              in="black-pixels"
-              operator="dilate"
-              radius="0.5"
-              result="smoothed"
-            />
-            <feComposite in="SourceGraphic" in2="smoothed" operator="out" />
-          </filter>
-        </defs>
-      </svg>
-      <div className="slider-wrapper">
-        {(label || showValue) && (
-          <div className="slider-header">
-            {label && (
-              <label htmlFor={sliderId} className="slider-label">
-                {label}
-              </label>
-            )}
-            {showValue && (
-              <span className="slider-value">{value}</span>
-            )}
-          </div>
-        )}
+      <div
+        className="slider-container"
+        id={id}
+        ref={sliderRef}
+        onMouseDown={handleSliderClick}
+        onTouchStart={handleSliderTouchStart}
+      >
+        <div className="slider-progress" ref={progressRef}></div>
         <div
-          ref={sliderRef}
-          className={`slider-track ${disabled ? 'disabled' : ''} ${isDragging ? 'dragging' : ''}`}
-          data-active={isActive}
-          onClick={handleTrackClick}
-          style={{
-            '--complete': `${percentage}`,
-            '--hue': 200,
-            '--delta': '0',
-          } as React.CSSProperties}
+          className="slider-thumb-glass"
+          ref={thumbRef}
+          onMouseDown={onMouseDown}
+          onTouchStart={onTouchStart}
         >
-          <div className="slider-knockout">
-            <div className="slider-indicator slider-indicator--masked">
-              <div className="slider-mask"></div>
-            </div>
-          </div>
-          <div className="slider-fill-liquid">
-            <div className="slider-shadow"></div>
-            <div className="slider-wrapper-inner">
-              <div className="slider-liquids">
-                <div className="slider-liquid-shadow"></div>
-                <div className="slider-liquid-track"></div>
-              </div>
-            </div>
-            <div className="slider-cover"></div>
-          </div>
-          <div
-            ref={thumbRef}
-            className="slider-thumb"
-            style={{ left: `${percentage}%` }}
-            role="slider"
-            aria-valuemin={min}
-            aria-valuemax={max}
-            aria-valuenow={value}
-            aria-disabled={disabled}
-            tabIndex={disabled ? -1 : 0}
-            data-dragging={isDragging}
-            data-active={isActive}
-            onKeyDown={handleKeyDown}
-          >
-            <div className="slider-thumb-liquid">
-              <div className="slider-thumb-shadow"></div>
-            </div>
-          </div>
+          <div className="slider-thumb-glass-filter"></div>
+          <div className="slider-thumb-glass-overlay"></div>
+          <div className="slider-thumb-glass-specular"></div>
         </div>
-        <input
-          id={sliderId}
-          type="range"
-          name={name}
-          min={min}
-          max={max}
-          step={step}
-          value={value}
-          disabled={disabled}
-          onChange={handleInputChange}
-          className="slider-input"
-          aria-label={label}
-        />
       </div>
+      <svg width="0" height="0" style={{ position: "absolute" }}>
+        <filter
+          id="mini-liquid-lens"
+          x="-50%"
+          y="-50%"
+          width="200%"
+          height="200%"
+          colorInterpolationFilters="sRGB"
+        >
+          <feImage
+            x="0"
+            y="0"
+            result="normalMap"
+            href="data:image/svg+xml;utf8,
+      <svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'>
+        <radialGradient id='invmap' cx='50%' cy='50%' r='75%'>
+          <stop offset='0%' stop-color='rgb(128,128,255)'/>
+          <stop offset='90%' stop-color='rgb(255,255,255)'/>
+        </radialGradient>
+        <rect width='100%' height='100%' fill='url(%23invmap)'/>
+      </svg>"
+          />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="normalMap"
+            scale="-252"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="displaced"
+          />
+          <feMerge>
+            <feMergeNode in="displaced" />
+          </feMerge>
+        </filter>
+      </svg>
     </>
   );
 };
-

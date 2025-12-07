@@ -1,283 +1,368 @@
-.switch-wrapper {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-base);
-  cursor: pointer;
+/* @import url('https://unpkg.com/normalize.css') layer(normalize); */
+
+@layer normalize, base, demo, toggle, transitions, debug;
+
+@layer debug {
+
+  [data-debug='true'] .switch-stage main {
+    transform: rotateX(-24deg) rotateY(24deg);
+    transition: transform 0.32s ease-out;
+  }
+
+  [data-debug='true'] :is(.debug, .knockout--debug) {
+    opacity: 1;
+    transition-property: transform, opacity;
+    transition-duration: 0.32s, 0.32s;
+    transition-delay: 0.4s, 0.4s;
+    transition-timing-function: ease-out, ease-in;
+  }
+
+  [data-debug='true'] .debug--knockout {
+    transform: translate3d(0, 0, -200px);
+  }
+
+  [data-debug='true'] .debug--indicator {
+    transform: translate3d(0, 0, 200px);
+  }
+
+  [data-debug='true'] .debug .arrow {
+    opacity: 0.6;
+    transition: opacity 0.1s 0.8s ease-out;
+  }
+
+  .debug {
+    transform-style: preserve-3d;
+    outline: 4px var(--checked) dashed;
+    outline-offset: 4px;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+  }
+
+  .debug .arrow {
+    transform-style: preserve-3d;
+    position: absolute;
+    left: calc(100% + 2rem);
+    top: 50%;
+    translate: 0 -50%;
+    transform: rotateY(-24deg) rotateX(24deg) translate3d(0, 0, 100px);
+    z-index: 20;
+    opacity: 0;
+  }
+
+  .indicator__liquid--debug {
+    pointer-events: none;
+  }
+
+  .indicator__liquid--debug .wrapper {
+    clip-path: unset;
+  }
+
+  .indicator__liquid--debug .liquids {
+    overflow: visible;
+  }
+
+  :is(.debug) {
+    transition-property: transform, opacity;
+    transition-duration: 0.32s, 0.32s;
+    transition-delay: 0.2s, 0.2s;
+    transition-timing-function: ease-in, ease-out;
+  }
+
+  .switch-stage main {
+    position: relative;
+    transition: transform 0.32s 0.4s ease-out;
+  }
+
+  .switch-stage main,
+  .liquid-toggle {
+    transform-style: preserve-3d;
+  }
 }
 
-.switch-svg-filters {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+@layer transitions {
+  :root {
+    --transition: 0.2s;
+    --ease: ease-out;
+  }
+
+  [data-pressed='true'] .liquid__track {
+    min-height: 30px;
+  }
+
+  [data-bounce='true']:has(:is(button:active, [data-pressed='true'])) {
+    --transition: 0.6s;
+    --ease: linear(0 0%,
+        0.6091 3.69%,
+        1.0259 7.24%,
+        1.1733 9.05%,
+        1.283 10.92%,
+        1.3562 12.87%,
+        1.3948 14.95%,
+        1.4014 16.03%,
+        1.3999 17.16%,
+        1.3731 19.64%,
+        1.3202 22.27%,
+        1.1394 29.39%,
+        1.0582 33.17%,
+        0.9943 37.45%,
+        0.9734 39.64%,
+        0.9593 41.92%,
+        0.9505 45.08%,
+        0.9517 48.7%,
+        0.9924 63.02%,
+        1.0046 71.2%,
+        1.0061 78.24%,
+        1 100%);
+  }
+
+  .indicator--masked .mask {
+    translate: calc((var(--complete) / 100) * (100cqi - 60cqi - (0 * var(--border)))) -50%;
+    transition-property: height, width, margin, scale;
+    transition-duration: var(--transition);
+    transition-timing-function: var(--ease);
+    will-change: height, width, margin;
+  }
+
+  .wrapper {
+    clip-path: inset(0 0 0 0 round 100px);
+    filter: blur(6px);
+    transition: filter var(--transition) var(--ease);
+  }
+
+  [aria-pressed='true']:not([data-active='true']) .liquid__track {
+    left: calc(var(--border) * 6);
+  }
+
+  .liquid__track {
+    left: 0;
+    transition-property: height, width, filter, left;
+    transition-duration: var(--transition);
+    transition-timing-function: var(--ease);
+    translate: calc((var(--complete) / 100) * (100cqi - 100% - (6 * var(--border)))) -50%;
+  }
+
+  [data-mapped='false'] .liquid__track {
+    transition-property: height, width, filter, left, background;
+    transition-duration: var(--transition), var(--transition), var(--transition),
+      var(--transition), calc(var(--transition) * 0.5);
+    transition-timing-function: var(--ease), var(--ease), var(--ease), var(--ease),
+      ease-out;
+  }
+
+  .indicator__liquid {
+    translate: calc((var(--complete) / 100) * (100cqi - 100% - (2 * var(--border)))) -50%;
+    transition-property: scale;
+    transition-duration: var(--transition);
+    transition-timing-function: var(--ease);
+  }
+
+  .indicator__liquid :is(.cover, .shadow) {
+    transition: opacity var(--transition) var(--ease);
+  }
+
+  [data-active='true'] .indicator--masked .mask,
+  .liquid-toggle:active .indicator--masked .mask {
+    height: calc((100% - (2 * var(--border))) * (1.65 - (var(--delta, 0) * 0.025)));
+    width: calc((60% - (2 * var(--border))) * (1.65 + (var(--delta, 0) * 0.025)));
+    margin-left: calc((60% - (2 * var(--border))) * ((0.65 + (var(--delta, 0) * 0.025)) * -0.5));
+  }
+
+  [data-active='true'] .indicator__liquid,
+  .liquid-toggle:active .indicator__liquid {
+    scale: calc(1.65 + (var(--delta, 0) * 0.025)) calc(1.65 - (var(--delta, 0) * 0.025));
+  }
+
+  [data-active='true'] .wrapper,
+  .liquid-toggle:active .wrapper {
+    filter: blur(0px);
+  }
+
+  [data-active='true'] .indicator__liquid .shadow,
+  .liquid-toggle:active .indicator__liquid .shadow {
+    opacity: 1;
+  }
+
+  [data-active='true'] .indicator__liquid .cover,
+  .liquid-toggle:active .indicator__liquid .cover {
+    opacity: 0;
+  }
+
+  [data-active='true'] .indicator__liquid .liquid__track,
+  .liquid-toggle:active .indicator__liquid .liquid__track {
+    left: calc(var(--border) * 3);
+    height: calc((var(--height) * 1px) - (6 * var(--border)));
+  }
 }
 
-/* Liquid Toggle Base Styles */
-.liquid-toggle {
-  --unchecked: hsl(218, 8%, 81%);
-  --checked: hsl(
-    var(--hue, 144),
-    calc((8 + (var(--complete) / 100 * (92))) * 1%),
-    calc((81 - (var(--complete) / 100 * (81 - 43))) * 1%)
-  );
-  --control: hsl(300, 100%, 100%);
-  --border: 5px;
-  --width: 140;
-  --height: 60;
-  --transition: 0.2s;
-  --ease: ease-out;
-  --delta: 0;
+@layer toggle {
+  [data-mapped='false'] .liquid-toggle {
+    --progress: round(down, var(--complete), 85);
+    --checked: hsl(var(--hue, 144),
+        calc((8 + (var(--progress) / 85 * 92)) * 1%),
+        calc((81 - (var(--progress) / 85 * (81 - 43))) * 1%));
+  }
 
-  height: calc(var(--height) * 1px);
-  width: calc(var(--width) * 1px);
-  border-radius: 100px;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  position: relative;
-  overflow: visible;
-  container-type: inline-size;
-  background: transparent;
-  transition: outline var(--transition) var(--ease);
-  outline-offset: 2px;
-  flex-shrink: 0;
-}
+  [data-mapped='false'] .liquid-toggle .indicator,
+  [data-mapped='false'] .liquid-toggle .indicator--masked {
+    transition: background calc(var(--transition) * 0.5) ease-out;
+  }
 
-/* Size variants */
-.liquid-toggle.small {
-  --width: 84;
-  --height: 36;
-  --border: 3px;
-}
+  [data-mapped='false'] .liquid-toggle .liquid__shadow {
+    transition: box-shadow calc(var(--transition) * 0.5) ease-out;
+  }
 
-.liquid-toggle.medium {
-  --width: 140;
-  --height: 60;
-  --border: 5px;
-}
+  .liquid-toggle {
+    --unchecked: hsl(218, 8%, 81%);
+    --checked: hsl(var(--hue, 144),
+        calc((8 + (var(--complete) / 100 * 92)) * 1%),
+        calc((81 - (var(--complete) / 100 * (81 - 43))) * 1%));
+    --control: hsl(300, 100%, 100%);
+    --border: 5px;
+    --width: 140;
+    --height: 60;
+    height: calc(var(--height) * 1px);
+    width: calc(var(--width) * 1px);
+    border-radius: 100px;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    overflow: visible;
+    container-type: inline-size;
+    background: #0000;
+    transition: outline var(--transition) var(--ease);
+    outline-offset: 2px;
+  }
 
-.liquid-toggle.large {
-  --width: 196;
-  --height: 84;
-  --border: 7px;
-}
+  .liquid-toggle:focus-visible {
+    outline: 4px solid color-mix(in oklch, var(--checked), #0000);
+  }
 
-.liquid-toggle:focus-visible {
-  outline: 4px solid color-mix(in oklch, var(--checked), transparent);
-}
+  .liquid-toggle:active {
+    outline: none;
+  }
 
-.liquid-toggle:active {
-  outline: none;
-}
+  .liquid-toggle[data-active='true']:focus-visible {
+    outline: 4px solid #0000;
+  }
 
-.liquid-toggle:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
+  .indicator {
+    border-radius: 100px;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    background: var(--checked);
+    position: absolute;
+    top: 50%;
+    scale: 1;
+    left: 50%;
+    translate: -50% -50%;
+  }
 
-/* Indicator Base */
-.indicator {
-  border-radius: 100px;
-  pointer-events: none;
-  height: 100%;
-  width: 100%;
-  background: var(--checked);
-  position: absolute;
-  top: 50%;
-  scale: 1;
-  left: 50%;
-  translate: -50% -50%;
-}
+  .knockout {
+    height: calc(var(--height) * 1px);
+    width: calc(var(--width) * 1px);
+    border-radius: 100px;
+    filter: url(#remove-black);
+    position: absolute;
+    inset: 0;
+    will-change: filter, scale;
+    transform: translate3d(0, 0, 0);
+  }
 
-/* Knockout Effect */
-.knockout {
-  height: calc(var(--height) * 1px);
-  width: calc(var(--width) * 1px);
-  border-radius: 100px;
-  filter: url(#remove-black);
-  position: absolute;
-  inset: 0;
-  will-change: filter, scale;
-  transform: translate3d(0, 0, 0);
-}
+  .indicator--masked {
+    background: var(--checked);
+    z-index: 12;
+    height: 100%;
+    width: 100%;
+    translate: -50% -50%;
+    container-type: inline-size;
+  }
 
-.indicator--masked {
-  background: var(--checked);
-  z-index: 12;
-  height: 100%;
-  width: 100%;
-  translate: -50% -50%;
-  container-type: inline-size;
-}
+  .indicator--masked .mask {
+    position: absolute;
+    height: calc(100% - (2 * var(--border)));
+    width: calc(60% - (2 * var(--border)));
+    top: 50%;
+    background: transparent;
+    left: var(--border);
+    border-radius: 100px;
+  }
 
-.indicator--masked .mask {
-  position: absolute;
-  height: calc(100% - (2 * var(--border)));
-  width: calc(60% - (2 * var(--border)));
-  top: 50%;
-  background: #000;
-  left: var(--border);
-  border-radius: 100px;
-  translate: calc(
-      (var(--complete) / 100) * (100cqi - 60cqi - (0 * var(--border)))
-    ) -50%;
-  transition-property: height, width, margin, translate;
-  transition-duration: var(--transition);
-  transition-timing-function: var(--ease);
-  will-change: height, width, margin;
-}
+  .wrapper {
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+  }
 
-/* Liquid Indicator */
-.indicator__liquid {
-  position: absolute;
-  height: calc(100% - (2 * var(--border)));
-  width: calc(60% - (2 * var(--border)));
-  container-type: inline-size;
-  top: 50%;
-  background: transparent;
-  left: var(--border);
-  border-radius: 100px;
-  translate: calc(
-      (var(--complete) / 100) * (100cqi - 100% - (2 * var(--border)))
-    ) -50%;
-  transition-property: scale;
-  transition-duration: var(--transition);
-  transition-timing-function: var(--ease);
-}
+  .liquids {
+    position: absolute;
+    inset: 0;
+    transform: translate3d(0, 0, 0);
+    border-radius: 100px;
+    overflow: hidden;
+    filter: url(#goo);
+  }
 
-.wrapper {
-  position: absolute;
-  inset: 0;
-  border-radius: 100px;
-  clip-path: inset(0 0 0 0 round 100px);
-  filter: blur(6px);
-  transition: filter var(--transition) var(--ease);
-}
+  .liquids .liquid__shadow {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0px 0px 3px 4px var(--checked),
+      inset calc(((var(--complete) / 100) * 8px) + -4px) 0px 3px 4px var(--checked);
+    border-radius: 100px;
+  }
 
-.liquids {
-  position: absolute;
-  inset: 0;
-  transform: translate3d(0, 0, 0);
-  border-radius: 100px;
-  overflow: hidden;
-  filter: url(#goo);
-}
+  .liquids .liquid__track {
+    content: '';
+    height: calc((var(--height) * 1px) - (0 * var(--border)));
+    width: calc((var(--width) * 1px) - (0 * var(--border)));
+    background: var(--checked);
+    border-radius: 100px;
+    position: absolute;
+    top: 50%;
+    left: var(--border);
+  }
 
-.liquid__shadow {
-  position: absolute;
-  inset: 0;
-  box-shadow: inset 0px 0px 3px 4px var(--checked),
-    inset calc(((var(--complete) / 100) * 8px) + -4px) 0px 3px 4px
-      var(--checked);
-  border-radius: 100px;
-}
+  .indicator__liquid {
+    position: absolute;
+    height: calc(100% - (2 * var(--border)));
+    width: calc(60% - (2 * var(--border)));
+    container-type: inline-size;
+    top: 50%;
+    background: #0000;
+    left: var(--border);
+    border-radius: 100px;
+  }
 
-.liquid__track {
-  content: '';
-  height: calc((var(--height) * 1px) - (0 * var(--border)));
-  width: calc((var(--width) * 1px) - (0 * var(--border)));
-  background: var(--checked);
-  border-radius: 100px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transition-property: height, width, filter, left;
-  transition-duration: var(--transition);
-  transition-timing-function: var(--ease);
-  translate: calc(
-      (var(--complete) / 100) * (100cqi - 100% - (6 * var(--border)))
-    ) -50%;
-}
+  .indicator__liquid .shadow {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+    box-shadow: 1px -1px 2px hsl(0 0% 100% / 0.5) inset,
+      0px -1px 2px hsl(0 0% 100% / 0.5) inset,
+      -1px -1px 2px hsl(0 0% 100% / 0.5) inset,
+      1px 1px 2px hsl(0 0% 30% / 0.5) inset,
+      -8px 4px 10px -6px hsl(0 0% 30% / 0.25) inset,
+      -1px 1px 6px hsl(0 0% 30% / 0.25) inset,
+      -1px -1px 8px hsl(0 0% 60% / 0.15), 1px 1px 2px hsl(0 0% 30% / 0.15),
+      2px 2px 6px hsl(0 0% 30% / 0.15),
+      -2px -1px 2px hsl(0 0% 100% / 0.25) inset,
+      3px 6px 16px -6px hsl(0 0% 30% / 0.5);
+    z-index: 20;
+  }
 
-.indicator__liquid .shadow {
-  opacity: 0;
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 100px;
-  box-shadow: 1px -1px 2px hsl(0 0% 100% / 0.5) inset,
-    0px -1px 2px hsl(0 0% 100% / 0.5) inset,
-    -1px -1px 2px hsl(0 0% 100% / 0.5) inset,
-    1px 1px 2px hsl(0 0% 30% / 0.5) inset,
-    -8px 4px 10px -6px hsl(0 0% 30% / 0.25) inset,
-    -1px 1px 6px hsl(0 0% 30% / 0.25) inset,
-    -1px -1px 8px hsl(0 0% 60% / 0.15), 1px 1px 2px hsl(0 0% 30% / 0.15),
-    2px 2px 6px hsl(0 0% 30% / 0.15),
-    -2px -1px 2px hsl(0 0% 100% / 0.25) inset,
-    3px 6px 16px -6px hsl(0 0% 30% / 0.5);
-  z-index: 20;
-  transition: opacity var(--transition) var(--ease);
-}
-
-.indicator__liquid .cover {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: white;
-  border-radius: 100px;
-  transition: opacity var(--transition) var(--ease);
-}
-
-/* Active/Pressed States */
-.liquid-toggle:active .indicator--masked .mask,
-.liquid-toggle[data-active='true'] .indicator--masked .mask {
-  height: calc((100% - (2 * var(--border))) * (1.65 - (var(--delta, 0) * 0.025)));
-  width: calc((60% - (2 * var(--border))) * (1.65 + (var(--delta, 0) * 0.025)));
-  margin-left: calc((60% - (2 * var(--border))) * ((.65 + (var(--delta, 0) * 0.025)) * -0.5));
-}
-
-.liquid-toggle:active .indicator__liquid,
-.liquid-toggle[data-active='true'] .indicator__liquid {
-  scale: calc(1.65 + (var(--delta, 0) * 0.025)) calc(1.65 - (var(--delta, 0) * 0.025));
-}
-
-.liquid-toggle:active .wrapper,
-.liquid-toggle[data-active='true'] .wrapper {
-  filter: blur(0px);
-}
-
-.liquid-toggle:active .indicator__liquid .shadow,
-.liquid-toggle[data-active='true'] .indicator__liquid .shadow {
-  opacity: 1;
-}
-
-.liquid-toggle:active .indicator__liquid .cover,
-.liquid-toggle[data-active='true'] .indicator__liquid .cover {
-  opacity: 0;
-}
-
-.liquid-toggle:active .liquid__track,
-.liquid-toggle[data-active='true'] .liquid__track {
-  left: calc(var(--border) * 3);
-  height: calc((var(--height) * 1px) - (6 * var(--border)));
-}
-
-.liquid-toggle[data-pressed='true'] .liquid__track {
-  min-height: 30px;
-}
-
-/* Label Styles */
-.switch-label {
-  font-size: var(--font-size-sm);
-  color: var(--text-color);
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.switch-label.disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.switch-required {
-  color: var(--color-error);
+  .indicator__liquid .cover {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    border-radius: 100px;
+  }
 }

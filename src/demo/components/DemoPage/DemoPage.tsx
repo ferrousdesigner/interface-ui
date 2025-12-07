@@ -237,12 +237,7 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item">
               <div className="demo-component-label">Slider</div>
-              <Slider
-                label="Volume"
-                value={sliderValue}
-                onChange={setSliderValue}
-                showValue
-              />
+              <Slider value={sliderValue} onChange={setSliderValue} />
             </div>
           </div>
         </div>
