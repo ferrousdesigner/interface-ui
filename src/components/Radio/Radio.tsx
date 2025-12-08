@@ -1,5 +1,6 @@
-import React from 'react';
-import './Radio.css';
+import React from "react";
+import "./Radio.css";
+import GlassSurface from "../GlassSurface/GlassSurface";
 
 export interface RadioProps {
   /**
@@ -55,22 +56,32 @@ export const Radio: React.FC<RadioProps> = ({
 
   return (
     <div className="radio-wrapper">
-      <input
-        id={radioId}
-        type="radio"
-        name={name}
-        value={value}
-        checked={checked}
-        defaultChecked={defaultChecked}
-        disabled={disabled}
-        required={required}
-        onChange={onChange}
-        className="radio-input"
-        aria-checked={checked}
-        aria-required={required}
-      />
+      <GlassSurface
+        height={18}
+        width={18}
+        borderRadius={20}
+        className="radio-glass-surface"
+      >
+        <input
+          id={radioId}
+          type="radio"
+          name={name}
+          value={value}
+          checked={checked}
+          defaultChecked={defaultChecked}
+          disabled={disabled}
+          required={required}
+          onChange={onChange}
+          className="radio-input"
+          aria-checked={checked}
+          aria-required={required}
+        />
+      </GlassSurface>
       {label && (
-        <label htmlFor={radioId} className={`radio-label ${disabled ? 'disabled' : ''}`}>
+        <label
+          htmlFor={radioId}
+          className={`radio-label ${disabled ? "disabled" : ""}`}
+        >
           {label}
           {required && <span className="radio-required">*</span>}
         </label>
@@ -78,4 +89,3 @@ export const Radio: React.FC<RadioProps> = ({
     </div>
   );
 };
-
