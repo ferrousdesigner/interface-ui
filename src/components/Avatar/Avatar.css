@@ -2,7 +2,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--background-color-dark);
   box-shadow: var(--glass-shadow-sm);
   backdrop-filter: saturate(180%) blur(2px);
   overflow: hidden;
@@ -51,7 +50,6 @@
   justify-content: center;
   font-weight: var(--font-weight-semibold);
   color: var(--text-color);
-  background-color: var(--color-primary-200);
 }
 
 .avatar.small .avatar-fallback {
@@ -69,4 +67,3 @@
 .avatar.xlarge .avatar-fallback {
   font-size: var(--font-size-2xl);
 }
-
