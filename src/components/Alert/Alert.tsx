@@ -1,5 +1,6 @@
-import React from 'react';
-import './Alert.css';
+import React from "react";
+import "./Alert.css";
+import GlassSurface from "../GlassSurface/GlassSurface";
 
 export interface AlertProps {
   /**
@@ -9,7 +10,7 @@ export interface AlertProps {
   /**
    * Alert variant
    */
-  variant?: 'info' | 'success' | 'warning' | 'error';
+  variant?: "info" | "success" | "warning" | "error";
   /**
    * Alert title
    */
@@ -30,51 +31,46 @@ export interface AlertProps {
 
 export const Alert: React.FC<AlertProps> = ({
   children,
-  variant = 'info',
+  variant = "info",
   title,
   dismissible = false,
   onDismiss,
-  className = '',
+  className = "",
 }) => {
   const handleDismiss = () => {
     onDismiss?.();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       handleDismiss();
     }
   };
 
   return (
-    <div
-      className={`alert ${variant} ${className}`}
-      role="alert"
-      aria-live="polite"
+    <GlassSurface
+      height="auto"
+      borderRadius={8}
+      className={`alert-glass-surface ${className}`}
     >
-      <div className="alert-content">
-        {title && (
-          <div className="alert-title">
-            {title}
-          </div>
-        )}
-        <div className="alert-message">
-          {children}
+      <div className={`alert ${variant}`} role="alert" aria-live="polite">
+        <div className="alert-content">
+          {title && <div className="alert-title">{title}</div>}
+          <div className="alert-message">{children}</div>
         </div>
+        {dismissible && (
+          <button
+            type="button"
+            className="alert-dismiss"
+            onClick={handleDismiss}
+            onKeyDown={handleKeyDown}
+            aria-label="Dismiss alert"
+          >
+            ×
+          </button>
+        )}
       </div>
-      {dismissible && (
-        <button
-          type="button"
-          className="alert-dismiss"
-          onClick={handleDismiss}
-          onKeyDown={handleKeyDown}
-          aria-label="Dismiss alert"
-        >
-          ×
-        </button>
-      )}
-    </div>
+    </GlassSurface>
   );
 };
-
