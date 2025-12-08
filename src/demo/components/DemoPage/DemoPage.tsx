@@ -195,15 +195,27 @@ export default function DemoPage() {
         <div className="demo-component-group">
           <h3 className="demo-group-title">Form Components</h3>
           <div className="demo-components-grid">
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Button</div>
               <Button>Click Me</Button>
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-large">
               <div className="demo-component-label">Input</div>
               <Input label="Email" placeholder="Enter your email" />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
+              <div className="demo-component-label">Checkbox</div>
+              <Checkbox label="I agree to the terms" />
+            </div>
+            <div className="demo-component-item demo-component-small">
+              <div className="demo-component-label">Radio</div>
+              <Radio label="Option 1" name="demo-radio" />
+            </div>
+            <div className="demo-component-item demo-component-small">
+              <div className="demo-component-label">Switch</div>
+              <Switch label="Enable notifications" />
+            </div>
+            <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Textarea</div>
               <Textarea
                 label="Message"
@@ -211,7 +223,7 @@ export default function DemoPage() {
                 rows={3}
               />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Select</div>
               <Select
                 label="Country"
@@ -223,19 +235,8 @@ export default function DemoPage() {
                 ]}
               />
             </div>
-            <div className="demo-component-item">
-              <div className="demo-component-label">Checkbox</div>
-              <Checkbox label="I agree to the terms" />
-            </div>
-            <div className="demo-component-item">
-              <div className="demo-component-label">Radio</div>
-              <Radio label="Option 1" name="demo-radio" />
-            </div>
-            <div className="demo-component-item">
-              <div className="demo-component-label">Switch</div>
-              <Switch label="Enable notifications" />
-            </div>
-            <div className="demo-component-item">
+
+            <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Slider</div>
               <Slider value={sliderValue} onChange={setSliderValue} />
             </div>
@@ -246,14 +247,14 @@ export default function DemoPage() {
         <div className="demo-component-group">
           <h3 className="demo-group-title">Display Components</h3>
           <div className="demo-components-grid">
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-large">
               <div className="demo-component-label">Card</div>
               <Card
                 header="Card Title"
                 children="This is a card component with header and content."
               />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Badge</div>
               <div className="demo-badge-group">
                 <Badge variant="primary">Primary</Badge>
@@ -261,7 +262,7 @@ export default function DemoPage() {
                 <Badge variant="error">Error</Badge>
               </div>
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Tag</div>
               <div className="demo-tag-group">
                 <Tag variant="primary">Tag</Tag>
@@ -269,15 +270,7 @@ export default function DemoPage() {
                 <Tag variant="error">Tag</Tag>
               </div>
             </div>
-            <div className="demo-component-item">
-              <div className="demo-component-label">Chip</div>
-              <div className="demo-chip-group">
-                <Chip>React</Chip>
-                <Chip>TypeScript</Chip>
-                <Chip removable>CSS</Chip>
-              </div>
-            </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Avatar</div>
               <div className="demo-avatar-group">
                 <Avatar initials="JD" size="small" />
@@ -285,7 +278,15 @@ export default function DemoPage() {
                 <Avatar initials="CD" size="large" />
               </div>
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-slider-2col">
+              <div className="demo-component-label">Chip</div>
+              <div className="demo-chip-group">
+                <Chip>React</Chip>
+                <Chip>TypeScript</Chip>
+                <Chip removable>CSS</Chip>
+              </div>
+            </div>
+            <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Alert</div>
               <Alert
                 variant="info"
@@ -293,11 +294,11 @@ export default function DemoPage() {
                 children="This is an informational alert"
               />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Progress</div>
               <Progress value={65} showValue />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">IconButton</div>
               <div className="demo-icon-button-group">
                 <IconButton icon="⚙" size="medium" aria-label="Settings" />
@@ -311,7 +312,7 @@ export default function DemoPage() {
         <div className="demo-component-group">
           <h3 className="demo-group-title">Navigation Components</h3>
           <div className="demo-components-grid">
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-medium">
               <div className="demo-component-label">Tabs</div>
               <Tabs
                 items={[
@@ -321,7 +322,7 @@ export default function DemoPage() {
                 ]}
               />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-large">
               <div className="demo-component-label">Accordion</div>
               <Accordion
                 items={[
@@ -338,7 +339,7 @@ export default function DemoPage() {
                 ]}
               />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-medium">
               <div className="demo-component-label">Menu</div>
               <Menu
                 items={[
@@ -348,7 +349,7 @@ export default function DemoPage() {
                 ]}
               />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Dropdown</div>
               <Dropdown
                 trigger="Select Option"
@@ -359,11 +360,11 @@ export default function DemoPage() {
                 ]}
               />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Pagination</div>
               <Pagination current={1} total={10} />
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-large">
               <div className="demo-component-label">List</div>
               <List
                 items={[
@@ -402,7 +403,7 @@ export default function DemoPage() {
         <div className="demo-component-group">
           <h3 className="demo-group-title">Overlay Components</h3>
           <div className="demo-components-grid">
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Modal</div>
               <Button onClick={() => setModalOpen(true)}>Open Modal</Button>
               <Modal
@@ -418,7 +419,7 @@ export default function DemoPage() {
                 </div>
               </Modal>
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Drawer</div>
               <Button onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
               <Drawer
@@ -430,11 +431,15 @@ export default function DemoPage() {
                 <p>This is a drawer component. It slides in from the side.</p>
               </Drawer>
             </div>
-            <div className="demo-component-item">
+            <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Tooltip</div>
               <Tooltip title="This is a tooltip message">
                 <span
-                  style={{ cursor: "pointer", textDecoration: "underline" }}
+                  style={{
+                    cursor: "pointer",
+                    textDecoration: "underline",
+                    color: "var(--color-primary)",
+                  }}
                 >
                   Hover over me
                 </span>
