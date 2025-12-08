@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
-import { validateRange, validatePositive } from '../../utils/validation';
-import './Progress.css';
+import React, { useEffect } from "react";
+import { validateRange, validatePositive } from "../../utils/validation";
+import GlassSurface from "../GlassSurface/GlassSurface";
+import "./Progress.css";
 
 export interface ProgressProps {
   /**
@@ -18,11 +19,11 @@ export interface ProgressProps {
   /**
    * Progress variant
    */
-  variant?: 'default' | 'success' | 'warning' | 'error';
+  variant?: "default" | "success" | "warning" | "error";
   /**
    * Progress size
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   /**
    * Whether the progress is indeterminate
    */
@@ -37,16 +38,16 @@ export const Progress: React.FC<ProgressProps> = ({
   value,
   max = 100,
   showValue = false,
-  variant = 'default',
-  size = 'medium',
+  variant = "default",
+  size = "medium",
   indeterminate = false,
-  className = '',
+  className = "",
 }) => {
   // Prop validation
   useEffect(() => {
-    validatePositive(max, 'Progress', 'max');
+    validatePositive(max, "Progress", "max");
     if (!indeterminate) {
-      validateRange(value, 0, max, 'Progress', 'value');
+      validateRange(value, 0, max, "Progress", "value");
     }
   }, [value, max, indeterminate]);
 
@@ -55,12 +56,12 @@ export const Progress: React.FC<ProgressProps> = ({
   // Map variant to hue for liquid glass effect
   const getVariantHue = () => {
     switch (variant) {
-      case 'success':
+      case "success":
         return 144;
-      case 'warning':
-        return 45;
-      case 'error':
-        return 0;
+      case "warning":
+        return 55;
+      case "error":
+        return 5;
       default:
         return 200;
     }
@@ -134,40 +135,49 @@ export const Progress: React.FC<ProgressProps> = ({
       </svg>
       <div className={`progress-wrapper ${className}`}>
         {showValue && !indeterminate && (
-          <div className="progress-label">
-            {Math.round(percentage)}%
-          </div>
+          <div className="progress-label">{Math.round(percentage)}%</div>
         )}
-        <div
-          className={`progress-track ${size} ${variant} ${indeterminate ? 'indeterminate' : ''}`}
-          role="progressbar"
-          aria-valuemin={0}
-          aria-valuemax={max}
-          aria-valuenow={indeterminate ? undefined : value}
-          aria-label="Progress"
-          style={{
-            '--complete': `${percentage}`,
-            '--hue': getVariantHue(),
-          } as React.CSSProperties}
+        <GlassSurface
+          height={20}
+          width="100%"
+          borderRadius={999}
+          className="progress-glass-surface"
         >
-          <div className="progress-knockout">
-            <div className="progress-indicator progress-indicator--masked">
-              <div className="progress-mask"></div>
-            </div>
-          </div>
-          <div className="progress-fill-liquid">
-            <div className="progress-shadow"></div>
-            <div className="progress-wrapper-inner">
-              <div className="progress-liquids">
-                <div className="progress-liquid-shadow"></div>
-                <div className="progress-liquid-track"></div>
+          <div
+            className={`progress-track ${size} ${variant} ${
+              indeterminate ? "indeterminate" : ""
+            }`}
+            role="progressbar"
+            aria-valuemin={0}
+            aria-valuemax={max}
+            aria-valuenow={indeterminate ? undefined : value}
+            aria-label="Progress"
+            style={
+              {
+                "--complete": `${percentage}`,
+                "--hue": getVariantHue(),
+                height: "20px",
+              } as React.CSSProperties
+            }
+          >
+            <div className="progress-knockout">
+              <div className="progress-indicator progress-indicator--masked">
+                <div className="progress-mask"></div>
               </div>
             </div>
-            <div className="progress-cover"></div>
+            <div className="progress-fill-liquid">
+              <div className="progress-shadow"></div>
+              <div className="progress-wrapper-inner">
+                <div className="progress-liquids">
+                  <div className="progress-liquid-shadow"></div>
+                  <div className="progress-liquid-track"></div>
+                </div>
+              </div>
+              <div className="progress-cover"></div>
+            </div>
           </div>
-        </div>
+        </GlassSurface>
       </div>
     </>
   );
 };
-

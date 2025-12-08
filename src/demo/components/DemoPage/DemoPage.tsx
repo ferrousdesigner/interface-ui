@@ -297,7 +297,8 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Progress</div>
-              <Progress value={65} showValue />
+              <Progress value={65} showValue variant="success" />
+              <Progress value={15} showValue variant="warning" />
             </div>
             <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">IconButton</div>
