@@ -1,5 +1,5 @@
-import React from 'react';
-import './Checkbox.css';
+import React, { useState, useRef, useEffect } from "react";
+import "./Checkbox.css";
 
 export interface CheckboxProps {
   /**
@@ -56,8 +56,11 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   id,
   value,
 }) => {
-  const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
+  const checkboxId =
+    id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
   const checkboxRef = React.useRef<HTMLInputElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [isActive, setIsActive] = useState(false);
 
   React.useEffect(() => {
     if (checkboxRef.current) {
@@ -65,25 +68,63 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     }
   }, [indeterminate]);
 
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (!wrapper || disabled) return;
+
+    const handleMouseDown = () => {
+      setIsActive(true);
+    };
+
+    const handleMouseUp = () => {
+      setTimeout(() => setIsActive(false), 150);
+    };
+
+    const handleMouseLeave = () => {
+      setIsActive(false);
+    };
+
+    wrapper.addEventListener("mousedown", handleMouseDown);
+    wrapper.addEventListener("mouseup", handleMouseUp);
+    wrapper.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      wrapper.removeEventListener("mousedown", handleMouseDown);
+      wrapper.removeEventListener("mouseup", handleMouseUp);
+      wrapper.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [disabled]);
+
   return (
     <div className="checkbox-wrapper">
-      <input
-        ref={checkboxRef}
-        id={checkboxId}
-        type="checkbox"
-        name={name}
-        value={value}
-        checked={checked}
-        defaultChecked={defaultChecked}
-        disabled={disabled}
-        required={required}
-        onChange={onChange}
-        className="checkbox-input"
-        aria-checked={indeterminate ? 'mixed' : checked}
-        aria-required={required}
-      />
+      <div
+        ref={wrapperRef}
+        className={`checkbox-glass-wrapper ${isActive ? "active" : ""}`}
+        data-active={isActive}
+      >
+        <input
+          ref={checkboxRef}
+          id={checkboxId}
+          type="checkbox"
+          name={name}
+          value={value}
+          checked={checked}
+          defaultChecked={defaultChecked}
+          disabled={disabled}
+          required={required}
+          onChange={onChange}
+          className="checkbox-input"
+          aria-checked={indeterminate ? "mixed" : checked}
+          aria-required={required}
+        />
+        <div className="checkbox-glass-shadow" />
+        <div className="checkbox-glass-cover" />
+      </div>
       {label && (
-        <label htmlFor={checkboxId} className={`checkbox-label ${disabled ? 'disabled' : ''}`}>
+        <label
+          htmlFor={checkboxId}
+          className={`checkbox-label ${disabled ? "disabled" : ""}`}
+        >
           {label}
           {required && <span className="checkbox-required">*</span>}
         </label>
@@ -91,4 +132,3 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     </div>
   );
 };
-
