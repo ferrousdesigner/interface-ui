@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Checkbox.css";
+import GlassSurface from "../GlassSurface/GlassSurface";
 
 export interface CheckboxProps {
   /**
@@ -102,21 +103,28 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         className={`checkbox-glass-wrapper ${isActive ? "active" : ""}`}
         data-active={isActive}
       >
-        <input
-          ref={checkboxRef}
-          id={checkboxId}
-          type="checkbox"
-          name={name}
-          value={value}
-          checked={checked}
-          defaultChecked={defaultChecked}
-          disabled={disabled}
-          required={required}
-          onChange={onChange}
-          className="checkbox-input"
-          aria-checked={indeterminate ? "mixed" : checked}
-          aria-required={required}
-        />
+        <GlassSurface
+          height={18}
+          width={18}
+          borderRadius={4}
+          className="checkbox-glass-surface"
+        >
+          <input
+            ref={checkboxRef}
+            id={checkboxId}
+            type="checkbox"
+            name={name}
+            value={value}
+            checked={checked}
+            defaultChecked={defaultChecked}
+            disabled={disabled}
+            required={required}
+            onChange={onChange}
+            className="checkbox-input"
+            aria-checked={indeterminate ? "mixed" : checked}
+            aria-required={required}
+          />
+        </GlassSurface>
         <div className="checkbox-glass-shadow" />
         <div className="checkbox-glass-cover" />
       </div>

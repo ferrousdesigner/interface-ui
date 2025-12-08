@@ -22,9 +22,9 @@
   cursor: pointer;
   position: relative;
   z-index: 1;
-  background-color: var(--background-color-dark);
-  box-shadow: var(--glass-shadow-sm);
-  backdrop-filter: saturate(180%) blur(2px);
+  /* background-color: var(--background-color-dark); */
+  /* box-shadow: var(--glass-shadow-sm); */
+  /* backdrop-filter: saturate(180%) blur(2px); */
   transition: backdrop-filter var(--transition-base), box-shadow var(--transition-base);
 }
 

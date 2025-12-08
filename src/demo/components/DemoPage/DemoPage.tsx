@@ -210,6 +210,7 @@ export default function DemoPage() {
             <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Radio</div>
               <Radio label="Option 1" name="demo-radio" />
+              <Radio label="Option 2" name="demo-radio" />
             </div>
             <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Switch</div>
