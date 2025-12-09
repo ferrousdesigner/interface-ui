@@ -1,0 +1,56 @@
+.glass-text-wrapper {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+}
+
+.glass-text-backdrop {
+  position: relative;
+  display: inline-block;
+}
+
+.glass-text {
+  position: relative;
+  z-index: 9999;
+  font-size: var(--glass-text-font-size, 20rem);
+  font-weight: var(--glass-text-font-weight, 700);
+  font-family: var(--glass-text-font-family, arial);
+  font-style: var(--glass-text-font-style, normal);
+  line-height: 1.14;
+  white-space: nowrap;
+  display: inline-block;
+  background: rgb(var(--glass-text-color, 255, 255, 255) / var(--glass-text-bg-opacity, 0.8));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: var(--glass-text-stroke-width, 1px) rgb(var(--glass-text-color, 255, 255, 255) / var(--glass-text-stroke-opacity, 0.3));
+  backdrop-filter: blur(var(--glass-text-blur, 2px)) saturate(var(--glass-text-saturation, 1.5));
+  -webkit-backdrop-filter: blur(var(--glass-text-blur, 2px)) saturate(var(--glass-text-saturation, 1.5));
+  text-shadow: 6px 10px 8px rgb(var(--glass-text-color, 255, 255, 255) / 0.4);
+  filter: var(--glass-text-filter);
+}
+
+.glass-text-shadow {
+  position: absolute;
+  top: var(--glass-text-shadow-y, 35px);
+  left: var(--glass-text-shadow-x, 13px);
+  white-space: nowrap;
+  font-size: var(--glass-text-font-size, 20rem);
+  font-weight: var(--glass-text-font-weight, 700);
+  font-family: var(--glass-text-font-family, arial);
+  font-style: var(--glass-text-font-style, normal);
+  line-height: 1.14;
+  color: rgb(33 40 26 / var(--glass-text-shadow-opacity, 0.3));
+  filter: blur(var(--glass-text-shadow-blur, 8px));
+  pointer-events: none;
+}
+
+.glass-text-svg-clip,
+.glass-text-svg-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}

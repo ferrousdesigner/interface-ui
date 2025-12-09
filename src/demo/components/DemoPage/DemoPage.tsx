@@ -330,12 +330,12 @@ export default function DemoPage() {
                 items={[
                   {
                     key: "1",
-                    header: "Section 1",
+                    header: "Header 1",
                     content: "Content for section 1",
                   },
                   {
                     key: "2",
-                    header: "Section 2",
+                    header: "Header 2",
                     content: "Content for section 2",
                   },
                 ]}
