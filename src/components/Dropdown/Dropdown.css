@@ -7,7 +7,21 @@
   border: none;
   background-color: var(--background-color-dark);
   cursor: pointer;
+  color: white;
   outline: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs, 8px);
+}
+
+.dropdown-trigger-content {
+  flex: 1;
+}
+
+.dropdown-trigger-chevron {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .dropdown-menu {
@@ -23,6 +37,7 @@
     opacity: 0;
     transform: translateY(-8px) scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -55,3 +70,9 @@
   margin-left: var(--spacing-xs);
 }
 
+/* Remove Menu background when inside GlassSurface dropdown */
+.dropdown-menu .menu {
+  background-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
