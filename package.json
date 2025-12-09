@@ -37,9 +37,8 @@
     "vite-plugin-dts": "^3.0.0"
   },
   "dependencies": {
-    "@lineiconshq/free-icons": "^1.0.3",
-    "@lineiconshq/react-lineicons": "^1.0.5",
     "gsap": "^3.13.0",
+    "lucide-react": "^0.556.0",
     "tweakpane": "4.0.4"
   }
 }

@@ -26,7 +26,7 @@ import { Tooltip } from "../../../components/Tooltip/Tooltip";
 import { IconButton } from "../../../components/IconButton/IconButton";
 import { List } from "../../../components/List/List";
 import "./DemoPage.css";
-import GlassSurface from "../../../components/GlassSurface/GlassSurface";
+import { ShoppingBag } from "lucide-react";
 
 export default function DemoPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -338,7 +338,7 @@ export default function DemoPage() {
                   },
                   {
                     key: "2",
-                    icon: <span>B</span>,
+                    icon: <ShoppingBag size={20} />,
                     title: "Section 2",
                     subtitle: "Another accordion section",
                     children: "Content for section 2",

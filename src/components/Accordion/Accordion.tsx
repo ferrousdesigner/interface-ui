@@ -4,10 +4,7 @@ import {
   validateUniqueKeys,
 } from "../../utils/validation";
 import GlassSurface from "../GlassSurface/GlassSurface";
-import {
-  ChevronDownStrokeRounded,
-  PlusStrokeRounded,
-} from "@lineiconshq/react-lineicons";
+import { Plus } from "lucide-react";
 import "./Accordion.css";
 
 export interface AccordionItem {
@@ -137,16 +134,13 @@ export const Accordion: React.FC<AccordionProps> = ({
               <div className="accordion-toggle-icon-wrapper">
                 {isOpen ? (
                   // Plus icon that rotates 45deg to become cross
-                  <PlusStrokeRounded
+                  <Plus
                     className="accordion-toggle-icon accordion-toggle-icon--open"
                     size={15}
                   />
                 ) : (
                   // Chevron down when closed
-                  <PlusStrokeRounded
-                    className="accordion-toggle-icon"
-                    size={15}
-                  />
+                  <Plus className="accordion-toggle-icon" size={15} />
                 )}
               </div>
             </div>
