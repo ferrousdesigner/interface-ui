@@ -39,9 +39,27 @@ export const components = [{
   component: Accordion,
   props: {
     items: [
-      { key: '1', header: 'Section 1', content: 'Content for section 1' },
-      { key: '2', header: 'Section 2', content: 'Content for section 2' },
-      { key: '3', header: 'Section 3', content: 'Content for section 3' },
+      { 
+        key: '1', 
+        icon: <span>A</span>,
+        title: 'Accent',
+        subtitle: 'A smooth accordion for your sliding needs',
+        children: 'An expandable and collapsible content panel that allows users to hide and reveal sections of information.'
+      },
+      { 
+        key: '2', 
+        icon: <span>B</span>,
+        title: 'Section 2',
+        subtitle: 'Another accordion section',
+        children: 'Content for section 2'
+      },
+      { 
+        key: '3', 
+        icon: <span>C</span>,
+        title: 'Section 3',
+        subtitle: 'Third accordion section',
+        children: 'Content for section 3'
+      },
     ],
   },
   stageProps: {
