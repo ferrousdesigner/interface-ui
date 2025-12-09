@@ -26,7 +26,7 @@ import { Tooltip } from "../../../components/Tooltip/Tooltip";
 import { IconButton } from "../../../components/IconButton/IconButton";
 import { List } from "../../../components/List/List";
 import "./DemoPage.css";
-import { ShoppingBag } from "lucide-react";
+import { Home, House, Info, PhoneCall, ShoppingBag } from "lucide-react";
 
 export default function DemoPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -358,9 +358,9 @@ export default function DemoPage() {
               <div className="demo-component-label">Menu</div>
               <Menu
                 items={[
-                  { key: "1", label: "Home" },
-                  { key: "2", label: "About" },
-                  { key: "3", label: "Contact" },
+                  { key: "1", label: "Home", icon: <House size={12} /> },
+                  { key: "2", label: "About", icon: <Info size={12} /> },
+                  { key: "3", label: "Contact", icon: <PhoneCall size={12} /> },
                 ]}
               />
             </div>
