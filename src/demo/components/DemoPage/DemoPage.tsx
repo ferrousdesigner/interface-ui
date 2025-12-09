@@ -314,7 +314,7 @@ export default function DemoPage() {
         <div className="demo-component-group">
           <h3 className="demo-group-title">Navigation Components</h3>
           <div className="demo-components-grid">
-            <div className="demo-component-item demo-component-medium">
+            <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Tabs</div>
               <Tabs
                 items={[
