@@ -275,8 +275,16 @@ export default function DemoPage() {
               <div className="demo-component-label">Avatar</div>
               <div className="demo-avatar-group">
                 <Avatar initials="JD" size="small" />
-                <Avatar initials="AB" size="medium" />
-                <Avatar initials="CD" size="large" />
+                <Avatar
+                  initials="AB"
+                  size="medium"
+                  src="https://t4.ftcdn.net/jpg/11/66/06/77/360_F_1166067709_2SooAuPWXp20XkGev7oOT7nuK1VThCsN.jpg"
+                />
+                <Avatar
+                  initials="CD"
+                  size="large"
+                  src="https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-man-avatar-image-for-profile-png-image_9197908.png"
+                />
               </div>
             </div>
             <div className="demo-component-item demo-slider-2col">
