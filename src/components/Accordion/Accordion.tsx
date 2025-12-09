@@ -4,6 +4,10 @@ import {
   validateUniqueKeys,
 } from "../../utils/validation";
 import GlassSurface from "../GlassSurface/GlassSurface";
+import {
+  ChevronDownStrokeRounded,
+  PlusStrokeRounded,
+} from "@lineiconshq/react-lineicons";
 import "./Accordion.css";
 
 export interface AccordionItem {
@@ -133,40 +137,16 @@ export const Accordion: React.FC<AccordionProps> = ({
               <div className="accordion-toggle-icon-wrapper">
                 {isOpen ? (
                   // Plus icon that rotates 45deg to become cross
-                  <svg
+                  <PlusStrokeRounded
                     className="accordion-toggle-icon accordion-toggle-icon--open"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M6 2V10M2 6H10"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                    size={15}
+                  />
                 ) : (
                   // Chevron down when closed
-                  <svg
+                  <PlusStrokeRounded
                     className="accordion-toggle-icon"
-                    width="12"
-                    height="12"
-                    viewBox="0 0 12 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M3 4.5L6 7.5L9 4.5"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                    size={15}
+                  />
                 )}
               </div>
             </div>

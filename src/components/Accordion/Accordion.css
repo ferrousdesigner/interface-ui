@@ -106,10 +106,17 @@
 }
 
 .accordion-toggle-icon {
-  width: 12px;
-  height: 12px;
   transition: transform 0.3s ease, opacity 0.2s ease;
   transform-origin: center;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.accordion-toggle-icon svg,
+.accordion-toggle-icon svg path {
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  color: inherit;
 }
 
 .accordion-toggle-icon--open {
