@@ -80,7 +80,7 @@ export const Switch: React.FC<SwitchProps> = ({
     deviation: 2,
     alpha: 16,
     bounce: true,
-    hue: 144,
+    hue: 200, // Will be updated from CSS variable in useEffect
     delta: true,
     bubble: true,
     mapped: false,
@@ -166,6 +166,18 @@ export const Switch: React.FC<SwitchProps> = ({
     const config = configRef.current;
     config.complete = currentChecked ? 100 : config.complete;
     completeRef.current = config.complete;
+
+    // Read hue from CSS theme variable
+    const rootStyle = getComputedStyle(document.documentElement);
+    const themeHue = rootStyle
+      .getPropertyValue("--color-switch-checked-hue")
+      .trim();
+    if (themeHue) {
+      const parsedHue = parseInt(themeHue, 10);
+      if (!isNaN(parsedHue)) {
+        config.hue = parsedHue;
+      }
+    }
 
     toggle.style.setProperty("--complete", `${config.complete}`);
     toggle.style.setProperty("--hue", `${config.hue}`);

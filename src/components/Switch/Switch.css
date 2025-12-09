@@ -202,7 +202,7 @@
 @layer toggle {
   [data-mapped='false'] .liquid-toggle {
     --progress: round(down, var(--complete), 85);
-    --checked: hsl(var(--hue, 144),
+    --checked: hsl(var(--hue, var(--color-switch-checked-hue, 200)),
         calc((8 + (var(--progress) / 85 * 92)) * 1%),
         calc((81 - (var(--progress) / 85 * (81 - 43))) * 1%));
   }
@@ -218,7 +218,7 @@
 
   .liquid-toggle {
     --unchecked: hsl(218, 8%, 81%);
-    --checked: hsl(var(--hue, 144),
+    --checked: hsl(var(--hue, var(--color-switch-checked-hue, 200)),
         calc((8 + (var(--complete) / 100 * 92)) * 1%),
         calc((81 - (var(--complete) / 100 * (81 - 43))) * 1%));
     --control: hsl(300, 100%, 100%);

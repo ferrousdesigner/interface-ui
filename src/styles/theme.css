@@ -85,6 +85,7 @@
   --color-info-800: rgba(68, 200, 255, 0.8);
   --color-info-900: rgba(68, 200, 255, 0.9);
   --color-info: rgba(68, 200, 255, 1);
+  --color-switch-checked-hue: 200;
 
   /* Accent Color */
   --color-accent: #fff;
