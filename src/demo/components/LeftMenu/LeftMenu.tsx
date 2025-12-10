@@ -5,7 +5,7 @@ export default function LeftMenu({
   activeComponent,
   setActiveComponent,
 }: {
-  activeComponent: string;
+  activeComponent: string | null;
   setActiveComponent: (component: string) => void;
 }) {
   return (

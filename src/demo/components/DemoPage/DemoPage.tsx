@@ -35,37 +35,6 @@ export default function DemoPage() {
 
   return (
     <div className="demo-page">
-      {/* Hero Section */}
-      <section className="demo-hero">
-        <div className="demo-hero-content">
-          <Badge variant="primary">UI Component Library</Badge>
-          <h1 className="demo-hero-title">Interface UI</h1>
-          <p className="demo-hero-description">
-            A comprehensive, modern React component library built with
-            TypeScript. Beautiful, accessible, and customizable components for
-            building exceptional user interfaces.
-          </p>
-          <div className="demo-hero-actions">
-            <Button>Get Started</Button>
-            <Button>View Documentation</Button>
-          </div>
-          <div className="demo-hero-stats">
-            <div className="demo-stat">
-              <div className="demo-stat-number">30+</div>
-              <div className="demo-stat-label">Components</div>
-            </div>
-            <div className="demo-stat">
-              <div className="demo-stat-number">100%</div>
-              <div className="demo-stat-label">TypeScript</div>
-            </div>
-            <div className="demo-stat">
-              <div className="demo-stat-number">0</div>
-              <div className="demo-stat-label">Dependencies</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
       <section className="demo-features">
         <h2 className="demo-section-title">Key Features</h2>
