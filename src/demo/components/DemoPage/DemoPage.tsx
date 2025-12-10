@@ -279,10 +279,22 @@ export default function DemoPage() {
                   initials="AB"
                   size="medium"
                   shape="square"
+                  badge={{
+                    value: 2,
+                    variant: "error",
+                    size: "small",
+                    color: "var(--interface-theme)",
+                  }}
                   src="https://t4.ftcdn.net/jpg/11/66/06/77/360_F_1166067709_2SooAuPWXp20XkGev7oOT7nuK1VThCsN.jpg"
                 />
                 <Avatar
                   initials="CD"
+                  badge={{
+                    value: 22,
+                    variant: "error",
+                    size: "small",
+                    color: "var(--interface-theme)",
+                  }}
                   size="large"
                   src="https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-man-avatar-image-for-profile-png-image_9197908.png"
                 />

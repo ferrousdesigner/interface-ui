@@ -94,7 +94,7 @@
   --color-accent-600: rgba(255, 255, 255, 0.6);
 
   /* Interface Theme Color */
-  --interface-theme: rgba(255, 255, 255, 0.15);
+  --interface-theme: #49a3fc;
 
   /* Text Colors */
   --text-color: #fff;
@@ -147,6 +147,8 @@
      ============================================ */
 
   /* Font Sizes */
+  --font-size-2xs: 0.60rem;
+
   --font-size-xs: 0.75rem;
   /* 12px */
   --font-size-sm: 0.875rem;
