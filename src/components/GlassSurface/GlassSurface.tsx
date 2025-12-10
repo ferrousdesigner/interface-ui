@@ -244,7 +244,7 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
       ref={containerRef}
       className={`glass-surface ${
         supportsSVGFilters() ? "glass-surface--svg" : "glass-surface--fallback"
-      } ${className}`}
+      } ${hugWidth ? "glass-surface--hug-width" : ""} ${className}`}
       style={containerStyle}
     >
       <svg className="glass-surface__filter" xmlns="http://www.w3.org/2000/svg">

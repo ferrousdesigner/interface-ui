@@ -201,7 +201,11 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item demo-component-large">
               <div className="demo-component-label">Input</div>
-              <Input label="Email" placeholder="Enter your email" />
+              <Input
+                label="Email"
+                placeholder="Enter your email"
+                width="100%"
+              />
             </div>
             <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Checkbox</div>
@@ -222,6 +226,7 @@ export default function DemoPage() {
                 label="Message"
                 placeholder="Enter your message"
                 rows={3}
+                width="100%"
               />
             </div>
             <div className="demo-component-item demo-slider-2col">

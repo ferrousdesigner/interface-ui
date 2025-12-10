@@ -2,6 +2,7 @@ import { components } from "../constants";
 import "./Stage.css";
 import { useState } from "react";
 import { Button } from "../../../components/Button/Button";
+import { Sidebar } from "../../../components/Sidebar/Sidebar";
 
 export default function Stage({ componentName }: { componentName: string }) {
   const component = components.find((c) => c.name === componentName);
@@ -48,6 +49,7 @@ export default function Stage({ componentName }: { componentName: string }) {
           {finalProps && <Component {...(finalProps as any)} />}
         </div>
       </div>
+      <Sidebar height="80vh" width="80px" />
     </div>
   );
 }
