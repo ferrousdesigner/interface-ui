@@ -110,7 +110,7 @@
 
 .accordion-header-text--open .accordion-title {
   transform: translateY(0);
-  margin-bottom: 4px;
+  /* margin-bottom: 4px; */
 }
 
 .accordion-subtitle {
@@ -139,7 +139,7 @@
 
 .accordion-toggle-icon-wrapper {
   position: absolute;
-  top: var(--spacing-base, 16px);
+  top: 50%;
   right: var(--spacing-base, 16px);
   width: 32px;
   height: 32px;
@@ -151,6 +151,7 @@
   justify-content: center;
   flex-shrink: 0;
   pointer-events: none;
+  transform: translateY(-50%);
 }
 
 .accordion-toggle-icon {
