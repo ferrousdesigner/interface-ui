@@ -8,38 +8,38 @@ export default function Stage({ componentName }: { componentName: string }) {
   const Component = component?.component;
   const props = component?.props;
   const view = component?.stageProps?.view;
-  
+
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  
+
   if (!Component) return null;
-  
+
   // Handle Modal and Drawer with state
-  let finalProps = props;
+  let finalProps: any = props;
   let showToggleButton = false;
-  
-  if (componentName === 'Modal') {
-    finalProps = { ...props, open: modalOpen, onClose: () => setModalOpen(false) };
+
+  if (componentName === "Modal") {
+    finalProps = { ...props, open: modalOpen };
     showToggleButton = true;
-  } else if (componentName === 'Drawer') {
-    finalProps = { ...props, open: drawerOpen, onClose: () => setDrawerOpen(false) };
+  } else if (componentName === "Drawer") {
+    finalProps = { ...props, open: drawerOpen };
     showToggleButton = true;
   }
-  
+
   return (
     <div className="stage">
       {showToggleButton && (
         <div className="stage-controls">
-          <Button 
+          <Button
             onClick={() => {
-              if (componentName === 'Modal') {
+              if (componentName === "Modal") {
                 setModalOpen(true);
-              } else if (componentName === 'Drawer') {
+              } else if (componentName === "Drawer") {
                 setDrawerOpen(true);
               }
             }}
           >
-            {componentName === 'Modal' ? 'Open Modal' : 'Open Drawer'}
+            {componentName === "Modal" ? "Open Modal" : "Open Drawer"}
           </Button>
         </div>
       )}

@@ -5,6 +5,7 @@ import LeftMenu from "./demo/components/LeftMenu/LeftMenu";
 import "./demo.css";
 import Stage from "./demo/components/Stage/Stage";
 import DemoPage from "./demo/components/DemoPage/DemoPage";
+import { components } from "./demo/components/constants";
 
 const Demo = () => {
   const [activeComponent, setActiveComponent] = useState("Demo");
@@ -96,7 +97,9 @@ const Demo = () => {
         {activeComponent === "Demo" ? (
           <DemoPage />
         ) : (
-          <Stage componentName={activeComponent} />
+          <>
+            <Stage componentName={activeComponent} />
+          </>
         )}
       </main>
     </div>
