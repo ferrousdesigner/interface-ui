@@ -1,12 +1,22 @@
+.sidebar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  position: relative;
+  flex-shrink: 0;
+}
+
 .sidebar-wrapper {
   z-index: var(--z-index-fixed);
+  overflow: visible;
+  flex-shrink: 0;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  transition: all var(--transition-normal);
-  overflow: hidden;
+  position: relative;
+  overflow: visible;
 }
 
 .sidebar-content {
@@ -16,8 +26,13 @@
   align-items: center;
   justify-content: flex-start;
   padding-top: var(--spacing-3xl);
+  padding-bottom: var(--spacing-3xl);
   height: 100%;
-  flex: 1;
+  flex-shrink: 0;
+  width: auto;
+  min-width: fit-content;
+  padding-left: var(--spacing-base);
+  padding-right: var(--spacing-base);
 }
 
 .sidebar-item {
@@ -27,7 +42,6 @@
   width: 50px;
   height: 50px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: saturate(180%) blur(4px);
   box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.4),
     inset -1px -1px 1px 0 rgba(255, 255, 255, 0.3),
@@ -64,4 +78,61 @@
   width: 20px;
   height: 20px;
   stroke-width: 2;
+}
+
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: inset 1px 1px 2px 0 rgba(255, 255, 255, 0.5),
+    inset -1px -1px 2px 0 rgba(255, 255, 255, 0.4),
+    0 4px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Expanded content wrapper - positioned to the left of sidebar */
+.sidebar-expanded-content-wrapper {
+  position: absolute;
+  right: 100%;
+  top: 0;
+  margin-right: var(--spacing-xl);
+  z-index: calc(var(--z-index-fixed) - 1);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateX(20px);
+  animation: slideInFromRight 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Expanded content area */
+.sidebar-expanded-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: var(--spacing-xl);
+  padding-top: var(--spacing-2xl);
+  overflow-y: auto;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Override GlassSurface transition for extender to match animation */
+.sidebar-expanded-content-wrapper .glass-surface {
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+
+.sidebar-expanded-inner {
+  width: 100%;
+  height: 100%;
 }

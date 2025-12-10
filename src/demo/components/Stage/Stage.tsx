@@ -12,6 +12,8 @@ export default function Stage({ componentName }: { componentName: string }) {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarExtenderWidth, setSidebarExtenderWidth] = useState("300px");
 
   if (!Component) return null;
 
@@ -44,12 +46,30 @@ export default function Stage({ componentName }: { componentName: string }) {
           </Button>
         </div>
       )}
-      <div className="stage-content">
-        <div className={`stage-component ${view}`}>
-          {finalProps && <Component {...(finalProps as any)} />}
+      <div className="stage-layout">
+        <div
+          className={`stage-content ${sidebarOpen ? "sidebar-open" : ""}`}
+          style={{
+            marginRight: sidebarOpen
+              ? `calc(${sidebarExtenderWidth} + 80px + var(--spacing-xl))`
+              : "0",
+          }}
+        >
+          <div className={`stage-component ${view}`}>
+            {finalProps && <Component {...(finalProps as any)} />}
+          </div>
         </div>
+        <Sidebar
+          height="80vh"
+          width="80px"
+          onToggle={(isOpen, extenderWidth) => {
+            setSidebarOpen(isOpen);
+            if (extenderWidth) {
+              setSidebarExtenderWidth(extenderWidth);
+            }
+          }}
+        />
       </div>
-      <Sidebar height="80vh" width="80px" />
     </div>
   );
 }
