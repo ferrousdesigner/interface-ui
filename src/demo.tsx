@@ -5,10 +5,12 @@ import LeftMenu from "./demo/components/LeftMenu/LeftMenu";
 import "./demo.css";
 import Stage from "./demo/components/Stage/Stage";
 import DemoPage from "./demo/components/DemoPage/DemoPage";
+import GetStartedPage from "./demo/components/GetStartedPage/GetStartedPage";
+import InstallationPage from "./demo/components/InstallationPage/InstallationPage";
 import { components } from "./demo/components/constants";
 
 const Demo = () => {
-  const [activeComponent, setActiveComponent] = useState("Demo");
+  const [activeComponent, setActiveComponent] = useState("Get Started");
 
   useEffect(() => {
     let rafId: number | null = null;
@@ -94,7 +96,11 @@ const Demo = () => {
           setActiveComponent={setActiveComponent}
           activeComponent={activeComponent}
         />
-        {activeComponent === "Demo" ? (
+        {activeComponent === "Get Started" ? (
+          <GetStartedPage />
+        ) : activeComponent === "Installation" ? (
+          <InstallationPage />
+        ) : activeComponent === "Demo" ? (
           <DemoPage />
         ) : (
           <>
