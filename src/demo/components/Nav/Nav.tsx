@@ -1,5 +1,5 @@
-import { Button } from '../../../components/Button/Button'
-import './Nav.css'
+import { Button } from "../../../components/Button/Button";
+import "./Nav.css";
 
 export default function Header() {
   return (
@@ -10,9 +10,9 @@ export default function Header() {
         </div>
       </div>
       <div className="nav-right">
-        <Button>Documentation</Button>
+        <Button variant="solid">Documentation</Button>
         <Button>Github</Button>
       </div>
     </div>
-  )
+  );
 }

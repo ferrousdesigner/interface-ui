@@ -14,7 +14,7 @@ export interface ButtonProps {
   /**
    * The variant of the button
    */
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "solid";
 }
 
 export const Button: React.FC<ButtonProps> = ({

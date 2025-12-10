@@ -40,3 +40,8 @@
 .button.secondary {
   color: var(--text-color);
 }
+
+.button.solid {
+  background: white;
+  color: black;
+}
