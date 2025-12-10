@@ -16,8 +16,13 @@
   width: 100%;
   padding: var(--spacing-base, 16px);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--spacing-sm, 8px);
+  transition: align-items 0.3s ease;
+}
+
+.accordion-item--align-top .accordion-header-wrapper {
+  align-items: flex-start;
 }
 
 .accordion-header {
@@ -27,12 +32,16 @@
   color: var(--text-color-inverse, #ffffff);
   cursor: pointer;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--spacing-sm, 12px);
   outline: none;
-  transition: all 0.2s ease;
+  transition: align-items 0.3s ease;
   text-align: left;
   padding: 0;
+}
+
+.accordion-item--align-top .accordion-header {
+  align-items: flex-start;
 }
 
 .accordion-header:hover:not(:disabled) {
@@ -70,6 +79,17 @@
   flex-direction: column;
   flex: 1;
   text-align: left;
+  justify-content: center;
+  min-height: 24px;
+  position: relative;
+}
+
+.accordion-header-text--centered {
+  justify-content: center;
+}
+
+.accordion-header-text--open {
+  justify-content: flex-start;
 }
 
 .accordion-title {
@@ -78,6 +98,19 @@
   font-weight: var(--font-weight-semibold, 600);
   color: var(--text-color-inverse, #ffffff);
   line-height: 1.4;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left center;
+  display: block;
+  margin-bottom: 0;
+}
+
+.accordion-header-text--centered .accordion-title {
+  transform: translateY(0);
+}
+
+.accordion-header-text--open .accordion-title {
+  transform: translateY(0);
+  margin-bottom: 4px;
 }
 
 .accordion-subtitle {
@@ -85,8 +118,23 @@
   font-size: var(--font-size-xs, 14px);
   font-weight: var(--font-weight-normal, 400);
   color: var(--text-color-inverse, #ffffff);
-  opacity: 0.7;
+  opacity: 0;
   line-height: 1.4;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s,
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
+  margin-top: 0;
+  display: block;
+}
+
+.accordion-subtitle--visible {
+  opacity: 0.7;
+  max-height: 50px;
+  transform: translateY(0);
+  margin-top: 0;
 }
 
 .accordion-toggle-icon-wrapper {

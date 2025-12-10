@@ -278,6 +278,7 @@ export default function DemoPage() {
                 <Avatar
                   initials="AB"
                   size="medium"
+                  shape="square"
                   src="https://t4.ftcdn.net/jpg/11/66/06/77/360_F_1166067709_2SooAuPWXp20XkGev7oOT7nuK1VThCsN.jpg"
                 />
                 <Avatar
@@ -343,6 +344,8 @@ export default function DemoPage() {
                     subtitle: "A smooth accordion for your sliding needs",
                     children:
                       "An expandable and collapsible content panel that allows users to hide and reveal sections of information.",
+                    showSubtitle: true,
+                    initialSubtitleShow: false,
                   },
                   {
                     key: "2",
@@ -350,6 +353,8 @@ export default function DemoPage() {
                     title: "Section 2",
                     subtitle: "Another accordion section",
                     children: "Content for section 2",
+                    showSubtitle: true,
+                    initialSubtitleShow: true,
                   },
                 ]}
               />

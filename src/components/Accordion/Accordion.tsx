@@ -16,6 +16,8 @@ export interface AccordionItem {
   content?: React.ReactNode; // For backward compatibility
   disabled?: boolean;
   onClick?: () => void;
+  showSubtitle?: boolean;
+  initialSubtitleShow?: boolean;
 }
 
 export interface AccordionProps {
@@ -43,6 +45,17 @@ export interface AccordionProps {
    * Accordion className
    */
   className?: string;
+  /**
+   * Whether to show subtitles in accordion items
+   * @default true
+   */
+  showSubtitle?: boolean;
+  /**
+   * Whether to show subtitles initially when accordion is closed
+   * If false, subtitles will only show when accordion is expanded
+   * @default true
+   */
+  initialSubtitleShow?: boolean;
 }
 
 export const Accordion: React.FC<AccordionProps> = ({
@@ -52,6 +65,8 @@ export const Accordion: React.FC<AccordionProps> = ({
   openKeys: controlledOpenKeys,
   onChange,
   className = "",
+  showSubtitle = true,
+  initialSubtitleShow = true,
 }) => {
   const [internalOpenKeys, setInternalOpenKeys] =
     useState<string[]>(defaultOpenKeys);
@@ -95,6 +110,22 @@ export const Accordion: React.FC<AccordionProps> = ({
       {items.map((item) => {
         const isOpen = openKeys.includes(item.key);
         const content = item.children || item.content;
+        const itemShowSubtitle =
+          item.showSubtitle !== undefined ? item.showSubtitle : showSubtitle;
+        const itemInitialSubtitleShow =
+          item.initialSubtitleShow !== undefined
+            ? item.initialSubtitleShow
+            : initialSubtitleShow;
+        const shouldShowSubtitle =
+          itemShowSubtitle &&
+          item.subtitle &&
+          (itemInitialSubtitleShow || isOpen);
+        const shouldCenterTitle =
+          !isOpen &&
+          !itemInitialSubtitleShow &&
+          item.subtitle &&
+          itemShowSubtitle;
+        const shouldAlignTop = shouldShowSubtitle || isOpen;
         return (
           <GlassSurface
             key={item.key}
@@ -105,7 +136,9 @@ export const Accordion: React.FC<AccordionProps> = ({
             brightness={isOpen ? 85 : 95}
             opacity={isOpen ? 0.4 : 0.1}
             blur={8}
-            className={`accordion-item ${isOpen ? "accordion-item--open" : ""}`}
+            className={`accordion-item ${
+              isOpen ? "accordion-item--open" : ""
+            } ${shouldAlignTop ? "accordion-item--align-top" : ""}`}
           >
             <div className="accordion-header-wrapper">
               <button
@@ -124,10 +157,22 @@ export const Accordion: React.FC<AccordionProps> = ({
                 {item.icon && (
                   <div className="accordion-header-icon">{item.icon}</div>
                 )}
-                <div className="accordion-header-text">
+                <div
+                  className={`accordion-header-text ${
+                    shouldCenterTitle ? "accordion-header-text--centered" : ""
+                  } ${shouldShowSubtitle ? "accordion-header-text--open" : ""}`}
+                >
                   <span className="accordion-title">{item.title}</span>
-                  {item.subtitle && (
-                    <span className="accordion-subtitle">{item.subtitle}</span>
+                  {shouldShowSubtitle && (
+                    <span
+                      className={`accordion-subtitle ${
+                        itemInitialSubtitleShow || isOpen
+                          ? "accordion-subtitle--visible"
+                          : ""
+                      }`}
+                    >
+                      {item.subtitle}
+                    </span>
                   )}
                 </div>
               </button>
