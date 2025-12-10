@@ -1,7 +1,12 @@
 import React, { useState, useRef } from "react";
 import "./Sidebar.css";
-import { GitBranch, Code, X } from "lucide-react";
+import { GitBranch, X, Book, Eye } from "lucide-react";
 import GlassSurface from "../GlassSurface/GlassSurface";
+import {
+  HistoryContent,
+  DocumentationContent,
+  LivePreviewContent,
+} from "./SidebarContent";
 
 export interface SidebarProps {
   /**
@@ -55,18 +60,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }> = items || [
     {
       icon: <GitBranch size={24} />,
-      label: "Branch",
-      extenderContent: <div>Branch Content</div>,
+      label: "History",
+      extenderContent: <HistoryContent />,
     },
     {
-      icon: <Code size={24} />,
-      label: "Code",
-      extenderContent: <div>Code Content</div>,
+      icon: <Book size={24} />,
+      label: "Documentation",
+      extenderContent: <DocumentationContent />,
     },
     {
-      icon: <Code size={24} />,
-      label: "Code",
-      extenderContent: <div>Code Content</div>,
+      icon: <Eye size={24} />,
+      label: "Live Preview",
+      extenderContent: <LivePreviewContent />,
     },
   ];
 
