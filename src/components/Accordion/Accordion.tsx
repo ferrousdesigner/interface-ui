@@ -18,6 +18,7 @@ export interface AccordionItem {
   onClick?: () => void;
   showSubtitle?: boolean;
   initialSubtitleShow?: boolean;
+  badge?: React.ReactNode;
 }
 
 export interface AccordionProps {
@@ -138,8 +139,13 @@ export const Accordion: React.FC<AccordionProps> = ({
             blur={8}
             className={`accordion-item ${
               isOpen ? "accordion-item--open" : ""
-            } ${shouldAlignTop ? "accordion-item--align-top" : ""}`}
+            } ${shouldAlignTop ? "accordion-item--align-top" : ""} ${
+              item.badge ? "accordion-item--has-badge" : ""
+            }`}
           >
+            {item.badge && (
+              <div className="accordion-badge-wrapper">{item.badge}</div>
+            )}
             <div className="accordion-header-wrapper">
               <button
                 className={`accordion-header ${

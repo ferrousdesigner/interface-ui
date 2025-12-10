@@ -346,6 +346,7 @@ export default function DemoPage() {
                       "An expandable and collapsible content panel that allows users to hide and reveal sections of information.",
                     showSubtitle: true,
                     initialSubtitleShow: false,
+                    badge: <Badge variant="success">New</Badge>,
                   },
                   {
                     key: "2",
