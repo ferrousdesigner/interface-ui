@@ -6,12 +6,12 @@ This document provides a comprehensive guide to the versioning system used in In
 
 | Stage | Purpose | Version Format | npm Tag | Install Command |
 |-------|---------|----------------|---------|-----------------|
-| **Pre-Alpha** | Early development, incomplete features | `0.0.1-pre-alpha.1` | `pre-alpha` | `npm install interface-ui@pre-alpha` |
-| **Alpha** | First testing, major features present but buggy | `0.1.0-alpha.1` | `alpha` | `npm install interface-ui@alpha` |
-| **Beta** | Mostly complete, released to wider testers | `0.1.0-beta.1` | `beta` | `npm install interface-ui@beta` |
-| **RC** | Almost final, final testing before stable | `0.1.0-rc.1` | `rc` | `npm install interface-ui@rc` |
-| **Stable** | Production-ready release | `0.1.0`, `1.0.0` | `latest` | `npm install interface-ui` |
-| **LTS** | Long-term support version | `1.0.0-lts.1` | `lts` | `npm install interface-ui@lts` |
+| **Pre-Alpha** | Early development, incomplete features | `0.0.1-pre-alpha.1` | `pre-alpha` | `npm install interface-ui-lib@pre-alpha` |
+| **Alpha** | First testing, major features present but buggy | `0.1.0-alpha.1` | `alpha` | `npm install interface-ui-lib@alpha` |
+| **Beta** | Mostly complete, released to wider testers | `0.1.0-beta.1` | `beta` | `npm install interface-ui-lib@beta` |
+| **RC** | Almost final, final testing before stable | `0.1.0-rc.1` | `rc` | `npm install interface-ui-lib@rc` |
+| **Stable** | Production-ready release | `0.1.0`, `1.0.0` | `latest` | `npm install interface-ui-lib` |
+| **LTS** | Long-term support version | `1.0.0-lts.1` | `lts` | `npm install interface-ui-lib@lts` |
 
 ## Quick Start
 
@@ -169,17 +169,17 @@ Users can install specific release stages:
 
 ```bash
 # Latest stable (default)
-npm install interface-ui
+npm install interface-ui-lib
 
 # Specific release stage
-npm install interface-ui@alpha
-npm install interface-ui@beta
-npm install interface-ui@rc
-npm install interface-ui@lts
+npm install interface-ui-lib@alpha
+npm install interface-ui-lib@beta
+npm install interface-ui-lib@rc
+npm install interface-ui-lib@lts
 
 # Specific version
-npm install interface-ui@0.1.0-alpha.1
-npm install interface-ui@0.1.0
+npm install interface-ui-lib@0.1.0-alpha.1
+npm install interface-ui-lib@0.1.0
 ```
 
 ## Best Practices
@@ -211,7 +211,7 @@ git commit -m "Reset version"
 ### Accidentally published wrong version
 ```bash
 # Unpublish (only within 72 hours)
-npm unpublish interface-ui@0.1.0-alpha.1
+npm unpublish interface-ui-lib@0.1.0-alpha.1
 
 # Then republish correct version
 npm run release:alpha

@@ -27,14 +27,14 @@ This project requires Node.js version 22. We recommend using [NVM](https://githu
 ## Installation
 
 ```bash
-npm install interface-ui
+npm install interface-ui-lib
 ```
 
 ## Usage
 
 ```tsx
-import { Button } from 'interface-ui';
-import 'interface-ui/style.css';
+import { Button } from 'interface-ui-lib';
+import 'interface-ui-lib/style.css';
 
 function App() {
   return (
@@ -322,37 +322,37 @@ npm run release:lts
    ```bash
    npm run release:pre-alpha
    ```
-   Install with: `npm install interface-ui@pre-alpha`
+   Install with: `npm install interface-ui-lib@pre-alpha`
 
    **Alpha** (published with `alpha` tag):
    ```bash
    npm run release:alpha
    ```
-   Install with: `npm install interface-ui@alpha`
+   Install with: `npm install interface-ui-lib@alpha`
 
    **Beta** (published with `beta` tag):
    ```bash
    npm run release:beta
    ```
-   Install with: `npm install interface-ui@beta`
+   Install with: `npm install interface-ui-lib@beta`
 
    **Release Candidate** (published with `rc` tag):
    ```bash
    npm run release:rc
    ```
-   Install with: `npm install interface-ui@rc`
+   Install with: `npm install interface-ui-lib@rc`
 
    **Stable** (published with `latest` tag - default):
    ```bash
    npm run release:stable
    ```
-   Install with: `npm install interface-ui` or `npm install interface-ui@latest`
+   Install with: `npm install interface-ui-lib` or `npm install interface-ui-lib@latest`
 
    **LTS** (published with `lts` tag):
    ```bash
    npm run release:lts
    ```
-   Install with: `npm install interface-ui@lts`
+   Install with: `npm install interface-ui-lib@lts`
 
 3. **Generic Release Script** (uses current version):
    ```bash
