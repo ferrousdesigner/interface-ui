@@ -33,6 +33,50 @@ export default function DemoPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [sliderValue, setSliderValue] = useState(50);
+  const [alerts, setAlerts] = useState([
+    {
+      id: 1,
+      variant: "warning" as const,
+      title: "Warning",
+      children: "This is a warning alert",
+      showBar: false,
+      showIcon: false,
+      actionText: "Learn more",
+      removeAnimation: "scale" as const,
+      removeAnimationOnWrapper: true,
+      showCloseIcon: true,
+    },
+    {
+      id: 2,
+      variant: "info" as const,
+      title: "Info",
+      children: "This is an informational alert",
+      showBar: true,
+      showIcon: false,
+      actionText: "Learn more",
+      dismissible: false,
+      showCloseIcon: false,
+    },
+    {
+      id: 3,
+      variant: "success" as const,
+      title: "Success",
+      children: "This is a success alert",
+      showBar: true,
+      showIcon: false,
+      actionText: "Learn more",
+      dismissible: true,
+      dismissLabel: "Dismiss",
+      size: "small" as const,
+      removeAnimation: "fade" as const,
+      removeAnimationOnWrapper: true,
+      showCloseIcon: true,
+    },
+  ]);
+
+  const removeAlert = (id: number) => {
+    setAlerts((prevAlerts) => prevAlerts.filter((alert) => alert.id !== id));
+  };
 
   return (
     <div className="demo-page">
@@ -167,11 +211,27 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Alert</div>
-              <Alert
-                variant="info"
-                title="Info"
-                children="This is an informational alert"
-              />
+              {alerts.map((alert) => (
+                <Alert
+                  key={alert.id}
+                  variant={alert.variant}
+                  title={alert.title}
+                  children={alert.children}
+                  showBar={alert.showBar}
+                  showIcon={alert.showIcon}
+                  actionText={alert.actionText}
+                  onAction={() => {
+                    console.log("Learn more clicked");
+                  }}
+                  dismissible={alert.dismissible}
+                  dismissLabel={alert.dismissLabel}
+                  onDismiss={() => removeAlert(alert.id)}
+                  size={alert.size}
+                  removeAnimation={alert.removeAnimation}
+                  removeAnimationOnWrapper={alert.removeAnimationOnWrapper}
+                  showCloseIcon={alert.showCloseIcon}
+                />
+              ))}
             </div>
             <div className="demo-component-item demo-slider-2col">
               <div className="demo-component-label">Progress</div>

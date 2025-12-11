@@ -4,10 +4,120 @@
   gap: var(--spacing-base);
   padding: var(--spacing-base) var(--spacing-base);
   border-radius: var(--radius-md);
-  background-color: var(--background-color-dark);
-  box-shadow: var(--glass-shadow-sm);
-  backdrop-filter: saturate(180%) blur(2px);
-  border-left: 4px solid;
+  border-left: 4px solid transparent;
+  position: relative;
+  color: var(--primary-text);
+}
+
+/* Size variants */
+.alert.small {
+  padding: calc(var(--spacing-base) * 0.75) calc(var(--spacing-base) * 0.75);
+  gap: calc(var(--spacing-base) * 0.75);
+}
+
+.alert.small .alert-title,
+.alert.small .alert-message,
+.alert.small .alert-action-link,
+.alert.small .alert-dismiss-link {
+  font-size: var(--font-size-xs);
+}
+
+.alert.small .alert-icon-default {
+  width: 20px;
+  height: 20px;
+  font-size: var(--font-size-xs);
+}
+
+.alert.small .alert-dismiss {
+  width: 20px;
+  height: 20px;
+}
+
+.alert.small .alert-dismiss svg {
+  width: 14px;
+  height: 14px;
+}
+
+.alert.medium {
+  /* Default size - no changes needed */
+}
+
+.alert.large {
+  padding: calc(var(--spacing-base) * 1.5) calc(var(--spacing-base) * 1.5);
+  gap: calc(var(--spacing-base) * 1.25);
+}
+
+.alert.large .alert-title,
+.alert.large .alert-message,
+.alert.large .alert-action-link,
+.alert.large .alert-dismiss-link {
+  font-size: var(--font-size-base);
+}
+
+.alert.large .alert-icon-default {
+  width: 28px;
+  height: 28px;
+  font-size: var(--font-size-base);
+}
+
+.alert.large .alert-dismiss {
+  width: 28px;
+  height: 28px;
+}
+
+.alert.large .alert-dismiss svg {
+  width: 20px;
+  height: 20px;
+}
+
+.alert-bar {
+  border-left-width: 6px;
+}
+
+.alert-icon-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alert-icon-default {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  font-style: italic;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+.alert.default .alert-icon-default {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+}
+
+.alert.info .alert-icon-default {
+  background-color: rgba(68, 200, 255, 1);
+  color: #ffffff;
+}
+
+.alert.success .alert-icon-default {
+  background-color: rgba(68, 255, 68, 1);
+  color: #ffffff;
+}
+
+.alert.error .alert-icon-default {
+  background-color: rgba(255, 68, 68, 1);
+  color: #ffffff;
+}
+
+.alert.warning .alert-icon-default {
+  background-color: rgba(255, 200, 68, 1);
+  color: #ffffff;
 }
 
 .alert-content {
@@ -20,16 +130,92 @@
 .alert-title {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-color-inverse);
+  color: var(--primary-text);
 }
 
 .alert-message {
   font-size: var(--font-size-sm);
-  color: var(--text-color-inverse);
+  color: var(--seondary-text);
   line-height: var(--line-height-normal);
 }
 
+.alert-actions {
+  display: flex;
+  gap: var(--spacing-base);
+  margin-top: var(--spacing-xs);
+}
+
+.alert-action-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  color: #666666;
+}
+
+.alert-action-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.alert-action-link:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.alert.default .alert-action-link {
+  color: #666666;
+}
+
+.alert.info .alert-action-link {
+  color: rgba(68, 200, 255, 1);
+}
+
+.alert.success .alert-action-link {
+  color: rgba(68, 255, 68, 1);
+}
+
+.alert.error .alert-action-link {
+  color: rgba(255, 68, 68, 1);
+}
+
+.alert.warning .alert-action-link {
+  color: rgba(255, 200, 68, 1);
+}
+
+.alert-dismiss-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+  color: #e7e7e7;
+  font-weight: 500;
+}
+
+.alert-dismiss-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.alert-dismiss-link:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.alert.default .alert-dismiss-link {
+  color: rgba(255, 68, 68, 1);
+}
+
 .alert-dismiss {
+  position: absolute;
+  top: var(--spacing-base);
+  right: var(--spacing-base);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,45 +223,365 @@
   height: var(--spacing-xl);
   border: none;
   border-radius: var(--radius-sm);
-  background-color: var(--background-color-dark);
-  color: rgba(255, 255, 255, 0.7);
+  background-color: transparent;
+  color: var(--primary-text);
   cursor: pointer;
   font-size: var(--font-size-lg);
   line-height: 1;
   padding: 0;
   margin: 0;
-  transition: background-color var(--transition-base), color var(--transition-base);
+  transition: opacity 0.2s ease;
   flex-shrink: 0;
+  z-index: 1;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .alert-dismiss:hover {
-  background-color: var(--background-color-light);
-  color: var(--text-color-inverse);
+  opacity: 0.6;
 }
 
 .alert-dismiss:focus {
   outline: none;
-  background-color: var(--background-color-light);
-  box-shadow: 0 0 0 2px var(--color-accent-300);
+  opacity: 0.6;
 }
 
+/* Default variant - no colored border */
+.alert.default {
+  border-left-color: transparent;
+}
+
+.alert.default.alert-bar {
+  border-left-color: transparent;
+}
+
+/* Info variant - blue */
 .alert.info {
-  border-left-color: var(--color-info-600);
-  background-color: var(--color-info-100);
+  /* border-left-color: rgba(68, 200, 255, 0.3); */
 }
 
+.alert.info.alert-bar {
+  border-left-color: rgba(68, 200, 255, 1);
+}
+
+/* Success variant - green */
 .alert.success {
-  border-left-color: var(--color-success-600);
-  background-color: var(--color-success-100);
+  /* border-left-color: rgba(68, 255, 68, 0.3); */
 }
 
-.alert.warning {
-  border-left-color: var(--color-warning-600);
-  background-color: var(--color-warning-100);
+.alert.success.alert-bar {
+  border-left-color: rgba(68, 255, 68, 1);
 }
 
+/* Error variant - red */
 .alert.error {
-  border-left-color: var(--color-error-600);
-  background-color: var(--color-error-100);
+  /* border-left-color: rgba(255, 68, 68, 0.3); */
 }
 
+.alert.error.alert-bar {
+  border-left-color: rgba(255, 68, 68, 1);
+}
+
+/* Warning variant - yellow */
+.alert.warning {
+  /* border-left-color: rgba(255, 200, 68, 0.3); */
+}
+
+.alert.warning.alert-bar {
+  border-left-color: rgba(255, 200, 68, 1);
+}
+
+/* Animation keyframes */
+@keyframes alertFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes alertSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes alertScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes alertBounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  70% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes alertSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes alertSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation classes */
+.alert-animate-fade {
+  animation: alertFadeIn 0.3s ease-out;
+}
+
+.alert-animate-slide {
+  animation: alertSlideIn 0.4s ease-out;
+}
+
+.alert-animate-scale {
+  animation: alertScaleIn 0.3s ease-out;
+}
+
+.alert-animate-bounce {
+  animation: alertBounceIn 0.6s ease-out;
+}
+
+.alert-animate-slideUp {
+  animation: alertSlideUp 0.4s ease-out;
+}
+
+.alert-animate-slideDown {
+  animation: alertSlideDown 0.4s ease-out;
+}
+
+/* Remove animation keyframes */
+@keyframes alertFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes alertSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes alertScaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes alertBounceOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.05);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+}
+
+@keyframes alertSlideUpOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes alertSlideDownOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Remove animation classes for alert content */
+.alert-remove-animate-fade {
+  animation: alertFadeOut 0.3s ease-in forwards;
+}
+
+.alert-remove-animate-slide {
+  animation: alertSlideOut 0.4s ease-in forwards;
+}
+
+.alert-remove-animate-scale {
+  animation: alertScaleOut 0.3s ease-in forwards;
+}
+
+.alert-remove-animate-bounce {
+  animation: alertBounceOut 0.6s ease-in forwards;
+}
+
+.alert-remove-animate-slideUp {
+  animation: alertSlideUpOut 0.4s ease-in forwards;
+}
+
+.alert-remove-animate-slideDown {
+  animation: alertSlideDownOut 0.4s ease-in forwards;
+}
+
+/* Remove animation classes for wrapper (GlassSurface) */
+.alert-wrapper-remove-animate-fade {
+  animation: alertFadeOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.alert-wrapper-remove-animate-slide {
+  animation: alertSlideOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.alert-wrapper-remove-animate-scale {
+  animation: alertScaleOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.alert-wrapper-remove-animate-bounce {
+  animation: alertBounceOut 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.alert-wrapper-remove-animate-slideUp {
+  animation: alertSlideUpOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.alert-wrapper-remove-animate-slideDown {
+  animation: alertSlideDownOut 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Alert wrapper (GlassSurface) styles for smooth queue repositioning */
+.alert-glass-surface {
+  transition:
+    height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* Ensure smooth transitions when alerts are removed from queue */
+.alert-glass-surface:not(.alert-wrapper-remove-animate-fade):not(.alert-wrapper-remove-animate-slide):not(.alert-wrapper-remove-animate-scale):not(.alert-wrapper-remove-animate-bounce):not(.alert-wrapper-remove-animate-slideUp):not(.alert-wrapper-remove-animate-slideDown) {
+  transition:
+    height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Alert container wrapper for queue positioning */
+.alert-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-base);
+}
+
+.alert-container>.alert-glass-surface {
+  transition:
+    height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth height collapse when alert is being removed */
+.alert-glass-surface.alert-wrapper-remove-animate-fade,
+.alert-glass-surface.alert-wrapper-remove-animate-slide,
+.alert-glass-surface.alert-wrapper-remove-animate-scale,
+.alert-glass-surface.alert-wrapper-remove-animate-bounce,
+.alert-glass-surface.alert-wrapper-remove-animate-slideUp,
+.alert-glass-surface.alert-wrapper-remove-animate-slideDown {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Ensure alert content also transitions smoothly */
+.alert.alert-remove-animate-fade,
+.alert.alert-remove-animate-slide,
+.alert.alert-remove-animate-scale,
+.alert.alert-remove-animate-bounce,
+.alert.alert-remove-animate-slideUp,
+.alert.alert-remove-animate-slideDown {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
