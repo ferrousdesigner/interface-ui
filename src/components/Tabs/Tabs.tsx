@@ -119,7 +119,7 @@ export const Tabs: React.FC<TabsProps> = ({
             "--target-height": `${height * 1.5}px`, // Scale height to 1.5x during transition
             "--complete": 100,
             "--delta": "12",
-            duration: 0.3,
+            duration: 0.15,
             ease: "power2.out",
             onUpdate: function () {
               const value = this.progress() * 100;
@@ -142,10 +142,10 @@ export const Tabs: React.FC<TabsProps> = ({
               "--target-height": `${height}px`,
               "--height-scale": "1",
               "--delta": "0",
-              duration: 0.2,
+              duration: 0.1,
               ease: "power2.out",
             },
-            "-=0.1"
+            "-=0.05"
           );
       } else {
         // Set position and size immediately
@@ -182,7 +182,7 @@ export const Tabs: React.FC<TabsProps> = ({
       // Reset flag after animation completes
       setTimeout(() => {
         isUserInitiatedChange.current = false;
-      }, 500); // Slightly longer than animation duration (400ms liquid + 200ms bounce = 500ms)
+      }, 250); // Slightly longer than animation duration (150ms liquid + 100ms bounce = 250ms)
     });
   };
 
