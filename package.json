@@ -59,8 +59,10 @@
     "vite-plugin-dts": "^3.0.0"
   },
   "dependencies": {
+    "@types/three": "^0.181.0",
     "gsap": "^3.13.0",
     "lucide-react": "^0.556.0",
+    "three": "^0.181.2",
     "tweakpane": "4.0.4"
   }
 }

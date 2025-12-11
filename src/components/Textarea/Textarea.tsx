@@ -71,6 +71,10 @@ export interface TextareaProps {
    * Textarea id attribute
    */
   id?: string;
+  /**
+   * Width of the GlassSurface wrapper
+   */
+  width?: number | string;
 }
 
 export const Textarea: React.FC<TextareaProps> = ({
@@ -91,6 +95,7 @@ export const Textarea: React.FC<TextareaProps> = ({
   onFocus,
   name,
   id,
+  width,
 }) => {
   const textareaId =
     id || `textarea-${Math.random().toString(36).substr(2, 9)}`;
@@ -106,7 +111,7 @@ export const Textarea: React.FC<TextareaProps> = ({
           {required && <span className="textarea-required">*</span>}
         </label>
       )}
-      <GlassSurface hugWidth={true} height={100}>
+      <GlassSurface hugWidth={!width} width={width} height={100}>
         <textarea
           id={textareaId}
           name={name}

@@ -35,37 +35,6 @@ export default function DemoPage() {
 
   return (
     <div className="demo-page">
-      {/* Hero Section */}
-      <section className="demo-hero">
-        <div className="demo-hero-content">
-          <Badge variant="primary">UI Component Library</Badge>
-          <h1 className="demo-hero-title">Interface UI</h1>
-          <p className="demo-hero-description">
-            A comprehensive, modern React component library built with
-            TypeScript. Beautiful, accessible, and customizable components for
-            building exceptional user interfaces.
-          </p>
-          <div className="demo-hero-actions">
-            <Button>Get Started</Button>
-            <Button>View Documentation</Button>
-          </div>
-          <div className="demo-hero-stats">
-            <div className="demo-stat">
-              <div className="demo-stat-number">30+</div>
-              <div className="demo-stat-label">Components</div>
-            </div>
-            <div className="demo-stat">
-              <div className="demo-stat-number">100%</div>
-              <div className="demo-stat-label">TypeScript</div>
-            </div>
-            <div className="demo-stat">
-              <div className="demo-stat-number">0</div>
-              <div className="demo-stat-label">Dependencies</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
       <section className="demo-features">
         <h2 className="demo-section-title">Key Features</h2>
@@ -201,7 +170,11 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item demo-component-large">
               <div className="demo-component-label">Input</div>
-              <Input label="Email" placeholder="Enter your email" />
+              <Input
+                label="Email"
+                placeholder="Enter your email"
+                width="100%"
+              />
             </div>
             <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Checkbox</div>
@@ -222,6 +195,7 @@ export default function DemoPage() {
                 label="Message"
                 placeholder="Enter your message"
                 rows={3}
+                width="100%"
               />
             </div>
             <div className="demo-component-item demo-slider-2col">
@@ -278,10 +252,23 @@ export default function DemoPage() {
                 <Avatar
                   initials="AB"
                   size="medium"
+                  shape="square"
+                  badge={{
+                    value: 2,
+                    variant: "error",
+                    size: "small",
+                    color: "var(--interface-theme)",
+                  }}
                   src="https://t4.ftcdn.net/jpg/11/66/06/77/360_F_1166067709_2SooAuPWXp20XkGev7oOT7nuK1VThCsN.jpg"
                 />
                 <Avatar
                   initials="CD"
+                  badge={{
+                    value: 22,
+                    variant: "error",
+                    size: "small",
+                    color: "var(--interface-theme)",
+                  }}
                   size="large"
                   src="https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-man-avatar-image-for-profile-png-image_9197908.png"
                 />
@@ -343,6 +330,9 @@ export default function DemoPage() {
                     subtitle: "A smooth accordion for your sliding needs",
                     children:
                       "An expandable and collapsible content panel that allows users to hide and reveal sections of information.",
+                    showSubtitle: true,
+                    initialSubtitleShow: false,
+                    badge: <Badge variant="success">New</Badge>,
                   },
                   {
                     key: "2",
@@ -350,6 +340,8 @@ export default function DemoPage() {
                     title: "Section 2",
                     subtitle: "Another accordion section",
                     children: "Content for section 2",
+                    showSubtitle: true,
+                    initialSubtitleShow: true,
                   },
                 ]}
               />

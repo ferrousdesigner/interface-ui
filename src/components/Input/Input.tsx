@@ -63,6 +63,10 @@ export interface InputProps {
    * Input id attribute
    */
   id?: string;
+  /**
+   * Width of the GlassSurface wrapper
+   */
+  width?: number | string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -81,6 +85,7 @@ export const Input: React.FC<InputProps> = ({
   onFocus,
   name,
   id,
+  width,
 }) => {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
   const hasError = variant === "error" || !!error;
@@ -94,7 +99,7 @@ export const Input: React.FC<InputProps> = ({
           {required && <span className="input-required">*</span>}
         </label>
       )}
-      <GlassSurface hugWidth={true} height={50}>
+      <GlassSurface hugWidth={!width} width={width} height={50}>
         <input
           id={inputId}
           name={name}
