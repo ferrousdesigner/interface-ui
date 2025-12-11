@@ -79,7 +79,7 @@ export function removePortalContainer(containerId: string): void {
 export function cleanupAllPortals(): void {
   if (typeof document === 'undefined') return;
   
-  portalContainers.forEach((container, id) => {
+  portalContainers.forEach((container) => {
     if (container.parentNode) {
       container.parentNode.removeChild(container);
     }
@@ -97,6 +97,7 @@ export function setPortalZIndex(containerId: string, zIndex: number): void {
     container.style.zIndex = zIndex.toString();
   }
 }
+
 
 
 

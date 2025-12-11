@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "../../../components/Button/Button";
 import { Card } from "../../../components/Card/Card";
 import { Badge } from "../../../components/Badge/Badge";
@@ -26,7 +26,7 @@ import { Tooltip } from "../../../components/Tooltip/Tooltip";
 import { IconButton } from "../../../components/IconButton/IconButton";
 import { List } from "../../../components/List/List";
 import "./DemoPage.css";
-import { Home, House, Info, PhoneCall, ShoppingBag } from "lucide-react";
+import { House, Info, PhoneCall, ShoppingBag } from "lucide-react";
 
 export default function DemoPage() {
   const [modalOpen, setModalOpen] = useState(false);

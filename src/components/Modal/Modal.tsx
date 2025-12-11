@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Portal } from '../Portal/Portal';
-import { validateSize, validateRequired } from '../../utils/validation';
+import { validateSize } from '../../utils/validation';
 import './Modal.css';
 
 export interface ModalProps {

@@ -15,7 +15,7 @@ export default function Stage({ componentName }: { componentName: string }) {
   if (!Component) return null;
   
   // Handle Modal and Drawer with state
-  let finalProps = props;
+  let finalProps: any = props;
   let showToggleButton = false;
   
   if (componentName === 'Modal') {

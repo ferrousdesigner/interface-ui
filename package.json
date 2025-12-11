@@ -14,12 +14,34 @@
       "import": "./dist/es/index.js",
       "require": "./dist/cjs/index.js",
       "types": "./dist/types/index.d.ts"
-    }
+    },
+    "./style.css": "./dist/style.css"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "vite --config vite.config.demo.ts",
+    "dev:demo": "vite --config vite.config.demo.ts",
+    "build": "npm run build:lib",
+    "build:lib": "tsc && vite build",
+    "build:demo": "vite build --config vite.config.demo.ts",
+    "build:all": "npm run build:lib && npm run build:demo",
+    "preview": "vite preview",
+    "preview:demo": "vite preview --config vite.config.demo.ts",
+    "prepublishOnly": "npm run build:lib",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "version:pre-alpha": "npm version prerelease --preid=pre-alpha",
+    "version:alpha": "npm version prerelease --preid=alpha",
+    "version:beta": "npm version prerelease --preid=beta",
+    "version:rc": "npm version prerelease --preid=rc",
+    "version:lts": "npm version prerelease --preid=lts",
+    "release": "npm run build:lib && npm publish && git push && git push --tags",
+    "release:pre-alpha": "npm run build:lib && npm publish --tag pre-alpha && git push && git push --tags",
+    "release:alpha": "npm run build:lib && npm publish --tag alpha && git push && git push --tags",
+    "release:beta": "npm run build:lib && npm publish --tag beta && git push && git push --tags",
+    "release:rc": "npm run build:lib && npm publish --tag rc && git push && git push --tags",
+    "release:stable": "npm run build:lib && npm publish --tag latest && git push && git push --tags",
+    "release:lts": "npm run build:lib && npm publish --tag lts && git push && git push --tags"
   },
   "peerDependencies": {
     "react": "^18.2.0",
