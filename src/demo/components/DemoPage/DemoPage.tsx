@@ -25,6 +25,7 @@ import { Drawer } from "../../../components/Drawer/Drawer";
 import { Tooltip } from "../../../components/Tooltip/Tooltip";
 import { IconButton } from "../../../components/IconButton/IconButton";
 import { List } from "../../../components/List/List";
+import KeyFeatures from "../KeyFeatures/KeyFeatures";
 import "./DemoPage.css";
 import { House, Info, PhoneCall, ShoppingBag } from "lucide-react";
 
@@ -36,125 +37,7 @@ export default function DemoPage() {
   return (
     <div className="demo-page">
       {/* Features Section */}
-      <section className="demo-features">
-        <h2 className="demo-section-title">Key Features</h2>
-        <div className="demo-features-grid">
-          <Card hoverable className="demo-feature-card">
-            <div className="demo-feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <h3>Beautiful Design</h3>
-            <p>
-              Modern, clean components with glass morphism effects and smooth
-              animations
-            </p>
-          </Card>
-          <Card hoverable className="demo-feature-card">
-            <div className="demo-feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-              </svg>
-            </div>
-            <h3>Lightweight</h3>
-            <p>
-              Zero external dependencies, optimized for performance and bundle
-              size
-            </p>
-          </Card>
-          <Card hoverable className="demo-feature-card">
-            <div className="demo-feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="3" />
-                <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
-              </svg>
-            </div>
-            <h3>Customizable</h3>
-            <p>
-              Fully themeable with CSS variables and easy to customize for your
-              brand
-            </p>
-          </Card>
-
-          <Card hoverable className="demo-feature-card">
-            <div className="demo-feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-            </div>
-            <h3>Accessible</h3>
-            <p>Built with accessibility in mind, following WCAG guidelines</p>
-          </Card>
-          <Card hoverable className="demo-feature-card">
-            <div className="demo-feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-                <line x1="12" y1="18" x2="12.01" y2="18" />
-              </svg>
-            </div>
-            <h3>Responsive</h3>
-            <p>Mobile-first design that works seamlessly across all devices</p>
-          </Card>
-          <Card hoverable className="demo-feature-card">
-            <div className="demo-feature-icon">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="16 18 22 12 16 6" />
-                <polyline points="8 6 2 12 8 18" />
-              </svg>
-            </div>
-            <h3>TypeScript</h3>
-            <p>Full TypeScript support with comprehensive type definitions</p>
-          </Card>
-        </div>
-      </section>
+      <KeyFeatures />
 
       {/* Component Showcase Section */}
       <section className="demo-showcase">
