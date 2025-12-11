@@ -1,5 +1,5 @@
 import React from "react";
-import { Book, FileText, ExternalLink } from "lucide-react";
+import { FileText, ExternalLink } from "lucide-react";
 import "../Sidebar.css";
 
 export const DocumentationContent: React.FC = () => {

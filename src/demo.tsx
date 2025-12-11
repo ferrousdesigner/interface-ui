@@ -8,7 +8,6 @@ import DemoPage from "./demo/components/DemoPage/DemoPage";
 import GetStartedPage from "./demo/components/GetStartedPage/GetStartedPage";
 import InstallationPage from "./demo/components/InstallationPage/InstallationPage";
 import LandingPage from "./demo/components/LandingPage/LandingPage";
-import { components } from "./demo/components/constants";
 
 const Demo = () => {
   const [activeComponent, setActiveComponent] = useState<string | null>(null);

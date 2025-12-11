@@ -1,4 +1,3 @@
-import { Badge } from "../../../components/Badge/Badge";
 import { Tag } from "../../../components/Tag/Tag";
 import "./InstallationPage.css";
 
