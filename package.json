@@ -1,7 +1,7 @@
 {
   "name": "interface-ui-lib",
   "private": false,
-  "version": "0.1.1-pre-alpha.1",
+  "version": "0.1.1-pre-alpha.2",
   "type": "module",
   "files": [
     "dist"
