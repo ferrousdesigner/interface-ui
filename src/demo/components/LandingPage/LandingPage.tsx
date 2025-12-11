@@ -1,6 +1,5 @@
 import { Button } from "../../../components/Button/Button";
 import { Badge } from "../../../components/Badge/Badge";
-import LightPillar from "./LightPillar";
 import "./LandingPage.css";
 
 interface LandingPageProps {
@@ -11,19 +10,6 @@ export default function LandingPage({ onExploreComponents }: LandingPageProps) {
   return (
     <div className="landing-page">
       <section className="landing-hero">
-        <LightPillar
-          topColor="#0f5754"
-          bottomColor="#518986"
-          intensity={1.0}
-          rotationSpeed={0.8}
-          glowAmount={0.005}
-          pillarWidth={3.0}
-          pillarHeight={0.4}
-          noiseIntensity={0.5}
-          pillarRotation={30}
-          interactive={false}
-          mixBlendMode="screen"
-        />
         <div className="landing-hero-content">
           <Badge variant="primary">UI Component Library</Badge>
           <h1 className="landing-hero-title">Interface UI</h1>
