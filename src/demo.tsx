@@ -12,18 +12,6 @@ import LandingPage from "./demo/components/LandingPage/LandingPage";
 const Demo = () => {
   const [activeComponent, setActiveComponent] = useState<string | null>(null);
 
-  // Prevent scrolling on landing page
-  useEffect(() => {
-    if (activeComponent === null) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [activeComponent]);
-
   useEffect(() => {
     let rafId: number | null = null;
     let lastScrollY = window.scrollY;
