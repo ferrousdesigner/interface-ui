@@ -27,7 +27,14 @@ import { IconButton } from "../../../components/IconButton/IconButton";
 import { List } from "../../../components/List/List";
 import KeyFeatures from "../KeyFeatures/KeyFeatures";
 import "./DemoPage.css";
-import { House, Info, PhoneCall, ShoppingBag } from "lucide-react";
+import {
+  House,
+  Info,
+  LogOut,
+  PhoneCall,
+  Settings,
+  ShoppingBag,
+} from "lucide-react";
 
 export default function DemoPage() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -253,15 +260,17 @@ export default function DemoPage() {
           <h3 className="demo-group-title">Navigation Components</h3>
           <div className="demo-components-grid">
             <div className="demo-component-item demo-slider-2col">
-              <div className="demo-component-label">Tabs</div>
-              <Tabs
+              <div className="demo-component-label">Dropdown</div>
+              <Dropdown
+                trigger="Select Option"
                 items={[
-                  { key: "1", label: "Tab 1", content: "Content for tab 1" },
-                  { key: "2", label: "Tab 2", content: "Content for tab 2" },
-                  { key: "3", label: "Tab 3", content: "Content for tab 3" },
+                  { key: "1", label: "Option 1" },
+                  { key: "2", label: "Option 2" },
                 ]}
+                occludeContent={false}
               />
             </div>
+
             <div className="demo-component-item demo-component-large">
               <div className="demo-component-label">Accordion</div>
               <Accordion
@@ -286,6 +295,16 @@ export default function DemoPage() {
                     showSubtitle: true,
                     initialSubtitleShow: true,
                   },
+                  {
+                    key: "3",
+                    icon: <Settings size={20} />,
+                    title: "Section 3",
+                    subtitle: "Another accordion section",
+                    children: "Content for section 3",
+                    showSubtitle: true,
+                    initialSubtitleShow: true,
+                    badge: <Badge variant="info">10</Badge>,
+                  },
                 ]}
               />
             </div>
@@ -296,17 +315,18 @@ export default function DemoPage() {
                   { key: "1", label: "Home", icon: <House size={12} /> },
                   { key: "2", label: "About", icon: <Info size={12} /> },
                   { key: "3", label: "Contact", icon: <PhoneCall size={12} /> },
+                  { key: "4", label: "Settings", icon: <Settings size={12} /> },
+                  { key: "5", label: "Logout", icon: <LogOut size={12} /> },
                 ]}
               />
             </div>
             <div className="demo-component-item demo-slider-2col">
-              <div className="demo-component-label">Dropdown</div>
-              <Dropdown
-                trigger="Select Option"
+              <div className="demo-component-label">Tabs</div>
+              <Tabs
                 items={[
-                  { key: "1", label: "Option 1" },
-                  { key: "2", label: "Option 2" },
-                  { key: "3", label: "Option 3" },
+                  { key: "1", label: "Tab 1", content: "Content for tab 1" },
+                  { key: "2", label: "Tab 2", content: "Content for tab 2" },
+                  { key: "3", label: "Tab 3", content: "Content for tab 3" },
                 ]}
               />
             </div>

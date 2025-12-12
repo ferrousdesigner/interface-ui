@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Dropdown.css";
 import { Menu, MenuProps } from "../Menu/Menu";
-import GlassSurface from "../GlassSurface/GlassSurface";
 
 export interface DropdownProps extends Omit<MenuProps, "className"> {
   /**
@@ -25,6 +24,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   onSelect,
   placement = "bottom",
   className = "",
+  occludeContent = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -91,18 +91,14 @@ export const Dropdown: React.FC<DropdownProps> = ({
         </span>
       </button>
       {isOpen && (
-        <GlassSurface
-          hugWidth={true}
-          height="auto"
-          className={`dropdown-menu ${placement}`}
-          blur={50}
-        >
+        <div className={`dropdown-menu ${placement}`}>
           <Menu
             items={items}
             selectedKey={selectedKey}
             onSelect={handleSelect}
+            occludeContent={occludeContent}
           />
-        </GlassSurface>
+        </div>
       )}
     </div>
   );

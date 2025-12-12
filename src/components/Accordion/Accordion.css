@@ -10,6 +10,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: visible;
+  margin-top: var(--spacing-xs);
 }
 
 .accordion-item--has-badge {

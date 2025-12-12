@@ -43,6 +43,10 @@ export interface GlassSurfaceProps {
    * If true, the component will hug its content width instead of using the width prop
    */
   hugWidth?: boolean;
+  /**
+   * If true, hides/occludes content that overlaps or passes through the glass surface
+   */
+  occludeContent?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -67,6 +71,7 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
   yChannel = "G",
   mixBlendMode = "difference",
   hugWidth = false,
+  occludeContent = false,
   className = "",
   style = {},
 }) => {
@@ -233,7 +238,7 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
     height: typeof height === "number" ? `${height}px` : height,
     borderRadius: `${borderRadius}px`,
     display: hugWidth ? "inline-flex" : "flex",
-    "--glass-frost": backgroundOpacity,
+    "--glass-frost": occludeContent ? 1 : backgroundOpacity,
     "--glass-saturation": saturation,
     "--filter-id": `url(#${filterId})`,
     border: `1px solid rgba(255, 255, 255, ${borderWidth})`,
@@ -244,7 +249,9 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
       ref={containerRef}
       className={`glass-surface ${
         supportsSVGFilters() ? "glass-surface--svg" : "glass-surface--fallback"
-      } ${hugWidth ? "glass-surface--hug-width" : ""} ${className}`}
+      } ${hugWidth ? "glass-surface--hug-width" : ""} ${
+        occludeContent ? "glass-surface--occlude" : ""
+      } ${className}`}
       style={containerStyle}
     >
       <svg className="glass-surface__filter" xmlns="http://www.w3.org/2000/svg">

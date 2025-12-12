@@ -27,6 +27,10 @@ export interface MenuProps {
    * Menu className
    */
   className?: string;
+  /**
+   * If true, hides/occludes content that overlaps or passes through the glass surface
+   */
+  occludeContent?: boolean;
 }
 
 export const Menu: React.FC<MenuProps> = ({
@@ -34,6 +38,7 @@ export const Menu: React.FC<MenuProps> = ({
   selectedKey,
   onSelect,
   className = "",
+  occludeContent = false,
 }) => {
   const handleClick = (key: string, disabled?: boolean) => {
     if (disabled) return;
@@ -73,9 +78,10 @@ export const Menu: React.FC<MenuProps> = ({
     <GlassSurface
       hugWidth={true}
       height="auto"
-      blur={50}
+      blur={200}
       borderRadius={12}
       className={className}
+      occludeContent={occludeContent}
     >
       <ul className="menu" role="menu">
         {items.map((item, index) => {

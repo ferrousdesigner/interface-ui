@@ -212,6 +212,8 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: var(--spacing-xs);
+  position: relative;
+  z-index: 0;
 }
 
 /* Component Groups */
