@@ -40,6 +40,7 @@ export default function DemoPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [sliderValue, setSliderValue] = useState(50);
+  const [currentPage, setCurrentPage] = useState(1);
   const [alerts, setAlerts] = useState([
     {
       id: 1,
@@ -332,7 +333,11 @@ export default function DemoPage() {
             </div>
             <div className="demo-component-item demo-component-small">
               <div className="demo-component-label">Pagination</div>
-              <Pagination current={1} total={10} />
+              <Pagination
+                current={currentPage}
+                total={10}
+                onChange={setCurrentPage}
+              />
             </div>
             <div className="demo-component-item demo-component-large">
               <div className="demo-component-label">List</div>
