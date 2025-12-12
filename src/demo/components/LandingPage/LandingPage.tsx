@@ -1,6 +1,7 @@
 import { Button } from "../../../components/Button/Button";
 import { Badge } from "../../../components/Badge/Badge";
 import Footer from "./Footer";
+import FAQs from "./FAQs";
 import "./LandingPage.css";
 
 interface LandingPageProps {
@@ -41,6 +42,7 @@ export default function LandingPage({ onExploreComponents }: LandingPageProps) {
           </div>
         </div>
       </section>
+      <FAQs />
       <Footer />
     </div>
   );
